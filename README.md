@@ -21,6 +21,8 @@ Download some sample files from Dropbox:
 Show usage:
 
     sudo docker run mana python3 mana.py
+    
+Run the samples:
 
 
 ## Development
