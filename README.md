@@ -7,7 +7,7 @@ Command-line tool that analyses ONT alignments (.bam) to report the following qu
 This program requests a few dependencies. The dependencies can be installed manually, however, the best option is to run it with `docker`. 
 
 * Download docker from https://docs.docker.com/get-docker
-* Open a terminal and type `docker`. Make sure `docker` is running.
+* Start a terminal and type `docker`. Make sure `docker` is running.
 
 Build Mana with docker:
 
