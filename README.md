@@ -25,5 +25,5 @@ Show usage:
 
 ## Development
 
-   sudo docker build -t mana .
-   sudo docker run -v ${PWD}:/data -p 3100:3100 -i -t mana jupyter notebook --allow-root --ip=0.0.0.0 --port=3100
+    sudo docker build -t mana .
+    sudo docker run -v ${PWD}:/data -p 3100:3100 -i -t mana jupyter notebook --allow-root --ip=0.0.0.0 --port=3100
