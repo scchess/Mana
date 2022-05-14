@@ -1,6 +1,6 @@
 ## Summary
 
-Command-line tool that analyses ONT alignments (.bam) to report the following quality control statistics:
+Command-line tool that analyses ONT alignments (.bam) to report the following quality control statistics.
 
 ## Quickstart
 
