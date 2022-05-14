@@ -17,10 +17,6 @@ Download some sample files from Dropbox:
 
    wget https://www.dropbox.com/s/2jp6ej8i2z3g2o9/cDNA_Mod_37C_Pe7_BaseGfpmRNA_allpassedreads_sorted.bam?dl=1
    mv cDNA_Mod_37C_PefT7_BaseGfpmRNA_allpassedreads_sorted.bam?dl=1 cDNA_Mod_37C_PefT7_BaseGfpmRNA_allpassedreads_sorted.bam
-   wget https://www.dropbox.com/s/fur68xv87m0lf3n/plasmid_gfp.fasta?dl=1
-   mv plasmid_gfp.fasta\?dl\=1 plasmid_gfp.fasta
-   wget https://www.dropbox.com/s/3a5xacxtf7w6wgw/mrna_target_bed.bed?dl=1
-   mv mrna_target_bed.bed?dl=1 mrna_target_bed.bed
 
 Show usage:
 
