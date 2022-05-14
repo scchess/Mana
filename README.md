@@ -11,16 +11,16 @@ This program requests a few dependencies. The easiest option is run it with `doc
 
 Build Mana with docker:
 
-   sudo docker build -t mana .
+    sudo docker build -t mana .
 
 Download some sample files from Dropbox:
 
-   wget https://www.dropbox.com/s/2jp6ej8i2z3g2o9/cDNA_Mod_37C_Pe7_BaseGfpmRNA_allpassedreads_sorted.bam?dl=1
-   mv cDNA_Mod_37C_PefT7_BaseGfpmRNA_allpassedreads_sorted.bam?dl=1 cDNA_Mod_37C_PefT7_BaseGfpmRNA_allpassedreads_sorted.bam
+    wget https://www.dropbox.com/s/2jp6ej8i2z3g2o9/cDNA_Mod_37C_Pe7_BaseGfpmRNA_allpassedreads_sorted.bam?dl=1
+    mv cDNA_Mod_37C_PefT7_BaseGfpmRNA_allpassedreads_sorted.bam?dl=1 cDNA_Mod_37C_PefT7_BaseGfpmRNA_allpassedreads_sorted.bam
 
 Show usage:
 
-   sudo docker run mana python3 mana.py
+    sudo docker run mana python3 mana.py
 
 
 ## Development
