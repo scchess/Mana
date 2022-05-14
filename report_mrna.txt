@@ -1,0 +1,32 @@
+mRNA Sequencing Results – cDNA unmodified
+
+File Locations
+Alignments                  @@Alignments@@
+Reference                   @@Reference@@
+Analysis Log                @@AnalysisLog@@
+Results                     @@Results@@
+
+Run Performance
+Total Reads                 @@TotalReads@@
+Mapped Reads                @@MappedReads@@
+Unmapped Reads              @@UnmappedReads@@
+Read Length Average         @@ReadLengthAverage@@
+Average Coverage            @@AverageCoverage@@
+Min Coverage                @@MinCoverage@@
+Max Coverage                @@MaxCoverage@@
+
+Error Performance per Nucleotide			
+Frequency					%avg	max		min
+Match                       @@MatchA@@    @@MatchMax@@    @@MatchMin@@
+Mismatch                    @@MismatchA@@    @@MismatchMax@@    @@MismatchMin@@
+Deletion                    @@DeleteA@@    @@DeleteMax@@    @@DeleteMin@@
+Insertion                   @@InsertA@@    @@InsertMax@@    @@InsertMin@@
+Total Error                 @@TotalA@@    @@TotalMax@@    @@TotalMin@@
+Notes	 	 	 
+Error = mismatch + insertion + deletion			
+Mismatch does not include deletion			
+
+Reads                       %             count	
+Total                       @@TotalP@@    @@TotalC@@
+On-target                   @@OnTargetP@@    @@OnTargetC@@
+Off-target                  @@OffTargetP@@    @@OffTargetC@@
