@@ -7,3 +7,4 @@ RUN git clone https://github.com/lh3/minimap2.git && \
     make && \
     cp minimap2 /usr/local/bin/
 RUN conda install -c bioconda pysamstats
+RUN conda install -c pytest
