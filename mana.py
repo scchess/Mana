@@ -1,3 +1,4 @@
+import os
 import analysis
 from argparse import ArgumentParser
 
@@ -25,6 +26,9 @@ if __name__ == '__main__':
               "fasta": args.p,
               "start": args.m1,
               "end": args.m2}
+
+    if not os.path.exists(args.b):
+        raise Exception("File not existed: " + args.b)
 
     logger = open("/tmp/log.txt", "w")
     logger.write("Parameters: " + str(params) + "\n")
