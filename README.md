@@ -19,7 +19,7 @@ docker is easy and straightforward.
 Make sure `docker` is running. Run the following. Please note your docker may need `sudo` to run.
 
     git clone https://github.com/scchess/Mana.git
-    cd mana
+    cd Mana
     docker build -t mana .
 
 Docker will automatically build the software dependencies. Let's download some sample files:
