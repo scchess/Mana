@@ -16,7 +16,9 @@ docker is easy and straightforward.
 * Download docker from https://docs.docker.com/get-docker
 * Start a terminal and type `docker`.
 
-Make sure `docker` is running. Run the following. Please note your docker may need `sudo` to run.
+Make sure `docker` is running.
+
+Run the following to download the source and build this program on Docker. Please note your docker may need `sudo` to run.
 
     git clone https://github.com/scchess/Mana.git
     cd Mana
