@@ -6,9 +6,9 @@ Command-line tool that analyses ONT alignments (.bam) to report the following qu
 
 This program requests the following dependencies:
 
-* Samtool
-* Pysam
-* bedtools
+* [SAMTool](https://samtool.org/)
+* [Pysam](https://pysam.readthedocs.io/en/latest/api.html)
+* [bedtools](https://bedtools.readthedocs.io/en/latest/)
 
 The dependencies can be installed manually, however, an alternative is `docker`. 
 
