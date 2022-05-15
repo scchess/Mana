@@ -45,19 +45,19 @@ if __name__ == '__main__':
     report_path = out_path + os.sep + ("mrna_results.txt" if mode == "mRNA" else "plasmid_results.txt")
 
     os.system("mkdir -p " + args.o)
-    with open(log_path, "w") as w:
+    with open(log_path, "w") as w1:
         params = {"mode": mode,
                   "bam": args.b,
                   "fasta": args.f,
-                  "logger": w,
+                  "logger": w1,
                   "bed": "mrna_target_bed.bed",
                   "path": tmp_path,
                   "log_path": log_path,
                   "report_path": report_path,
                   "start": args.m1,
                   "end": args.m2}
-        tools.info(str(params), w)
+        tools.info(str(params), w1)
         txt = analysis.run(params)
-        with open(report_path, "w") as w:
-            w.write(txt)
-        tools.info("Generated: " + report_path, w)
+        with open(report_path, "w") as w2:
+            w2.write(txt)
+        tools.info("Generated: " + report_path, w1)

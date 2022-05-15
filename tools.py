@@ -1,5 +1,4 @@
 import os
-import pickle
 
 
 def info(x, w):
@@ -15,13 +14,3 @@ def formatDP(x):
 def system(cmd, w):
     info(cmd, w)
     os.system(cmd)
-
-
-def save(x, file):
-    with open(file, "wb") as w:
-        pickle.dump(x, w, protocol=4)
-
-
-def load(file):
-    with open(file, "rb") as r:
-        return pickle.load(r)
