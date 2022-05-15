@@ -42,6 +42,10 @@ Run an mRNA analysis:
     docker run -v ${PWD}:/src -i -t mana python3 mana.py --mrna -b sample.bam -f plasmid_gfp.fasta -m1 432 -m2 1635
     cat outputs/mrna_results.txt
 
-Generally, to run Mana in docker:
+Generally, to run Mana with `docker`:
 
     docker run -v ${PWD}:/src -i -t mana **<YOUR_USAGE>**
+
+For example, print the help page:
+
+    docker run -v ${PWD}:/src -i -t **mana python3 mana.py -h**
