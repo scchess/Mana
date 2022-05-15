@@ -11,7 +11,7 @@ TOOL OPTIONS:
 	-h                          Display this help usage message
 	-p1                         Start coordinate of polyA tract (ie. first base)
 	-p2                         Last coordinate of polyA tract (ie. last base)
-	-o							Output directory. Default to "outputs".
+	-o                          Output directory. Default to "outputs".
 	--plasmid                   Plasmid analysis
 	--mrna                      mRNA analsysis
 
