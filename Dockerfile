@@ -28,8 +28,7 @@ RUN wget https://github.com/arq5x/bedtools2/releases/download/v2.30.0/bedtools-2
 RUN conda install -c bioconda pysamstats
 RUN conda install -c anaconda pytest
 RUN conda install -c anaconda pandas
-RUN conda config --add channels conda-forge
-RUN conda install --channel=conda-forge tabulate
+RUN conda install -c conda-forge tabulate
 
 WORKDIR /src
 COPY . /src
