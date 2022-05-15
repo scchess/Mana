@@ -20,7 +20,7 @@ Make sure `docker` is running.
 
 Run the following to download the source and build this program on Docker.
 
-> :warning: **Your docker may need `sudo` to run
+> :warning: Your docker may need `sudo` to run
 
     git clone https://github.com/scchess/Mana.git
     cd Mana
