@@ -29,7 +29,7 @@ Docker will automatically build the software dependencies. Let's download a samp
     wget https://www.dropbox.com/s/2jp6ej8i2z3g2o9/cDNA_Mod_37C_Pe7_BaseGfpmRNA_allpassedreads_sorted.bam?dl=1
     mv cDNA_Mod_37C_Pe7_BaseGfpmRNA_allpassedreads_sorted.bam\?dl\=1 sample.bam
 
-Use docker to show command-line usage:
+Use `docker` to show command-line usage:
 
     docker run mana python3 mana.py
     
