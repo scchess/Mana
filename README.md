@@ -24,7 +24,7 @@ Run the following to download the source and build this program on Docker. Pleas
     cd Mana
     docker build -t mana .
 
-Docker will automatically build the software dependencies. Let's download some sample files:
+Docker will automatically build the software dependencies. Let's download a sample alignment file:
 
     wget https://www.dropbox.com/s/2jp6ej8i2z3g2o9/cDNA_Mod_37C_Pe7_BaseGfpmRNA_allpassedreads_sorted.bam?dl=1
     mv cDNA_Mod_37C_Pe7_BaseGfpmRNA_allpassedreads_sorted.bam\?dl\=1 sample.bam
