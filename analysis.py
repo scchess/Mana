@@ -6,7 +6,7 @@ import pysamstats
 from tools import system
 
 
-def mRNA(x):
+def mRNA(x, cached=False):
     assert("bam") in x
     assert("fasta") in x
 
@@ -30,19 +30,20 @@ def mRNA(x):
     on_target_flagstat_path = path + os.sep + os.path.basename(bam) + "_on_target_flagstat.txt"
     off_target_flagstat_path = path + os.sep + os.path.basename(bam) + "_off_target_flagstat.txt"
 
-    system("mkdir -p " + path, logger)
-    system("samtools index " + bam, logger)
-    system("samtools stats " + bam + " > " + stats_path, logger)
-    system("samtools coverage " + bam + " > " + coverage_path, logger)
-    system("samtools flagstat " + bam + " > " + flagstat_path, logger)
-    system("samtools depth " + bam + " > " + depth_path, logger)
-    system("pysamstats --max-depth=3000000 --fasta " + fasta + " --type variation " + bam + " > " + pysam_path, logger)
-    system("bedtools intersect -a " + bam + " -b " + bed + " > " + on_target_path, logger)
-    system("bedtools intersect -a " + bam + " -v -b " + bed + " > " + off_target_path, logger)
-    system("samtools index " + on_target_path, logger)
-    system("samtools index " + off_target_path, logger)
-    system("samtools flagstat " + on_target_path + " > " + on_target_flagstat_path, logger)
-    system("samtools flagstat " + off_target_path + " > " + off_target_flagstat_path, logger)
+    if not cached:
+        system("mkdir -p " + path, logger)
+        system("samtools index " + bam, logger)
+        system("samtools stats " + bam + " > " + stats_path, logger)
+        system("samtools coverage " + bam + " > " + coverage_path, logger)
+        system("samtools flagstat " + bam + " > " + flagstat_path, logger)
+        system("samtools depth " + bam + " > " + depth_path, logger)
+        system("pysamstats --max-depth=3000000 --fasta " + fasta + " --type variation " + bam + " > " + pysam_path, logger)
+        system("bedtools intersect -a " + bam + " -b " + bed + " > " + on_target_path, logger)
+        system("bedtools intersect -a " + bam + " -v -b " + bed + " > " + off_target_path, logger)
+        system("samtools index " + on_target_path, logger)
+        system("samtools index " + off_target_path, logger)
+        system("samtools flagstat " + on_target_path + " > " + on_target_flagstat_path, logger)
+        system("samtools flagstat " + off_target_path + " > " + off_target_flagstat_path, logger)
 
     assert(os.path.exists(depth_path))
     assert(os.path.exists(pysam_path))
@@ -62,15 +63,21 @@ def mRNA(x):
 
 
 def run(x):
-    assert(x["analysis"] == "mRNA" or x["analysis"] == "plasma")
-    if x["analysis"] == "mRNA":
+    assert(x["mode"] == "mRNA" or x["mode"] == "plasmid")
+    assert("bam" in x)
+    assert("bed" in x)
+    assert("path" in x)
+    assert("fasta" in x)
+    assert("log_path" in x)
+    assert("report_path" in x)
+    if x["mode"] == "mRNA":
         data = mRNA(x)
         pysam1 = data["pysam1"]
         flag1 = data["flag1"]
         flag2 = data["flag2"]
         flag3 = data["flag3"]
         stats1 = data["stats1"]
-        txt = report.generate_mRNA(x["bam"], x["fasta"], x["report"], x["log"], pysam1, flag1, flag2, flag3, stats1)
-        with open(x["report"], "w") as w:
-            w.write(txt)
+        txt = report.generate_mRNA(x["bam"], x["fasta"], x["report_path"], x["log_path"], pysam1, flag1, flag2, flag3, stats1)
+    else:
+        pass
     return txt

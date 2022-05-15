@@ -29,7 +29,7 @@ RUN conda install -c bioconda pysamstats
 RUN conda install -c anaconda pytest
 RUN conda install -c anaconda pandas
 RUN conda config --add channels conda-forge
-RUN conda install --channel=conda-forge jupyter
+RUN conda install --channel=conda-forge tabulate
 
 WORKDIR /src
 COPY . /src

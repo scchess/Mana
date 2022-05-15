@@ -2,21 +2,23 @@ mana - analysis of mRNA manufacture quality using Oxford Nanopore Sequencing
 
 TOOL OPTIONS:
 	Required:
-	-plasmid                    Plasmid analysis
-	-mrna                       mRNA analsysis
 	-b                          Input BAM file containing ONT reads aligned to plasmid sequence.
-	-p                          Input FASTA file of plasmid template sequence (used for in vitro transcription reaction).
+	-f                          Input FASTA file of plasmid template sequence (used for in vitro transcription reaction).
 	-m1                         Start coordinate of mRNA (ie. first base)
 	-m2                         Last coordinate of mRNA (ie. last base)
 
 	Optional:
+	-h                          Display this help usage message
 	-p1                         Start coordinate of polyA tract (ie. first base)
 	-p2                         Last coordinate of polyA tract (ie. last base)
+	-o							Output directory. Default to "outputs".
+	--plasmid                   Plasmid analysis
+	--mrna                      mRNA analsysis
 
 
 USAGE EXAMPLE:
-	$ mana -mrna -b alignments.bam -p plasmid.fa -m1 400 -m2 1200 -p1 1201 -p2 1320 >results.txt
+	$ python3 mana.py -b sample.bam -f plasmid_gfp.fasta -m1 432 -m2 1635
 
 OUTPUTS:
 	mrna_results.txt            Output TEXT file report describing mRNA quality.
-	plasmid_results.txt.        Output TEXT file report describing plasmid quality (sequencing etc.).
+	plasmid_results.txt         Output TEXT file report describing plasmid quality (sequencing etc.).
