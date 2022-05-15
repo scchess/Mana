@@ -25,6 +25,8 @@ Run the following to download the source and build this program on Docker.
     git clone https://github.com/scchess/Mana.git
     cd Mana
     docker build -t mana .
+    
+## Quick Start (Docker)
 
 Docker will automatically build the software dependencies. Let's download a sample alignment file:
 
