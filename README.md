@@ -44,8 +44,11 @@ Run an mRNA analysis:
 
 Generally, to run Mana with `docker`:
 
-    docker run -v ${PWD}:/src -i -t mana **<YOUR_USAGE>**
+    docker run -v ${PWD}:/src -i -t mana <YOUR_USAGE>
 
 For example, print the help page:
 
-    docker run -v ${PWD}:/src -i -t **mana python3 mana.py -h**
+    docker run -v ${PWD}:/src -i -t mana python3 mana.py -h
+
+where `<YOUR_USAGE>` is `python3 mana.py -h` in this example.
+
