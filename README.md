@@ -16,9 +16,7 @@ docker is easy and straightforward.
 * Download docker from https://docs.docker.com/get-docker
 * Start a terminal and type `docker`.
 
-Make sure `docker` is running.
-
-Run the following to download the source and build this program on Docker.
+Make sure `docker` is running. Run the following to download the source and build this program on Docker.
 
 > :warning: Your docker may need `sudo` to run
 
