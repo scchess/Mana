@@ -37,9 +37,9 @@ def generate_mRNA(bam_path, fasta_path, report_path, log_path, pysam1, flag1, fl
     txt = txt.replace("@@TotalMax@@", str(pysam1["total_max"]))
 
     margin = ""
-    x1 = ["Frequency", "Match", "Mismatch", "Deletion", "Insertion", "Total Error"]
+    x1 = ["Frequency %", "Match", "Mismatch", "Deletion", "Insertion", "Total Error"]
     x2 = [margin, margin, margin, margin, margin, margin]
-    x3 = ["%avg", str(formatDP(pysam1["match_mean"])), str(formatDP(pysam1["mismatches_mean"])), str(formatDP(pysam1["deletions_mean"])), str(formatDP(pysam1["insertions_mean"])), str(formatDP(pysam1["total_mean"]))]
+    x3 = ["avg", str(formatDP(pysam1["match_mean"])), str(formatDP(pysam1["mismatches_mean"])), str(formatDP(pysam1["deletions_mean"])), str(formatDP(pysam1["insertions_mean"])), str(formatDP(pysam1["total_mean"]))]
     x4 = [margin, margin, margin, margin, margin, margin]
     x5 = ["max", str(formatDP(pysam1["match_max"])), str(formatDP(pysam1["mismatches_max"])), str(formatDP(pysam1["deletions_max"])), str(formatDP(pysam1["insertions_max"])), str(formatDP(pysam1["total_max"]))]
     x6 = [margin, margin, margin, margin, margin, margin]
@@ -86,9 +86,9 @@ def generate_mRNA(bam_path, fasta_path, report_path, log_path, pysam1, flag1, fl
 
     txt = txt.replace("@@TotalReads@@", str(flag1["total"]))
     txt = txt.replace("@@MappedReads@@", str(flag1["mapped"]))
-    txt = txt.replace("@@UnmappedReads@@", str(flag1["secondary"]))
+    txt = txt.replace("@@UnmappedReads@@", str(flag1["unmapped"]))
     txt = txt.replace("@@ReadLengthAverage@@", str(stats1["read_average"]))
-    txt = txt.replace("@@AverageCoverage@@", str(pysam1["mean_coverage"]))
+    txt = txt.replace("@@AverageCoverage@@", str(formatDP(pysam1["mean_coverage"])))
     txt = txt.replace("@@MinCoverage@@", str(pysam1["min_coverage"]))
     txt = txt.replace("@@MaxCoverage@@", str(pysam1["max_coverage"]))
 

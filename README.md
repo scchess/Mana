@@ -28,8 +28,8 @@ Make sure `docker` is running. Run the following to download the source and buil
 
 Docker will automatically build the software dependencies. Let's download a sample alignment file:
 
-    wget https://www.dropbox.com/s/2jp6ej8i2z3g2o9/cDNA_Mod_37C_Pe7_BaseGfpmRNA_allpassedreads_sorted.bam?dl=1
-    mv cDNA_Mod_37C_Pe7_BaseGfpmRNA_allpassedreads_sorted.bam\?dl\=1 sample.bam
+    wget https://www.dropbox.com/s/25bvchax1wgvf5m/cDNA_UnMod_37C_NEBT7_BaseGfpmRNA_1strun_allpassedreads_sorted.bam?dl=1
+    mv cDNA_UnMod_37C_NEBT7_BaseGfpmRNA_1strun_allpassedreads_sorted.bam?dl=1 sample.bam
 
 Use `docker` to show command-line usage:
 
@@ -49,4 +49,3 @@ Simply replace `<YOUR_USAGE>` with your command line usage. For example, to prin
     docker run -v ${PWD}:/src -i -t mana python3 mana.py -h
 
 where `<YOUR_USAGE>` is `python3 mana.py -h` in this example.
-

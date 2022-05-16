@@ -9,25 +9,30 @@ def parse(file):
     cols = [4, 6, 8, 10, 12, 14, 16, 18, 20, 22]
     df = df.drop(df.columns[cols], axis=1)
 
-    match_mean = np.mean(df["matches"])
-    match_min = np.min(df["matches"])
-    match_max = np.max(df["matches"])
+    df["Match per base"] = df["matches"] / df["reads_all"]
+    df["Mismatch per base"] = df["mismatches"] / df["reads_all"]
+    df["Deletion per base"] = df["deletions"] / df["reads_all"]
+    df["Insertion per base"] = df["insertions"] / df["reads_all"]
 
-    mismatches_mean = np.mean(df["mismatches"])
-    mismatches_min = np.min(df["mismatches"])
-    mismatches_max = np.max(df["mismatches"])
+    match_mean = np.mean(df["Match per base"])
+    match_min = np.min(df["Match per base"])
+    match_max = np.max(df["Match per base"])
 
-    deletions_mean = np.mean(df["deletions"])
-    deletions_min = np.min(df["deletions"])
-    deletions_max = np.max(df["deletions"])
+    mismatches_mean = np.mean(df["Mismatch per base"])
+    mismatches_min = np.min(df["Mismatch per base"])
+    mismatches_max = np.max(df["Mismatch per base"])
 
-    insertions_mean = np.mean(df["insertions"])
-    insertions_min = np.min(df["insertions"])
-    insertions_max = np.max(df["insertions"])
+    deletions_mean = np.mean(df["Deletion per base"])
+    deletions_min = np.min(df["Deletion per base"])
+    deletions_max = np.max(df["Deletion per base"])
+
+    insertions_mean = np.mean(df["Insertion per base"])
+    insertions_min = np.min(df["Insertion per base"])
+    insertions_max = np.max(df["Insertion per base"])
 
     total_mean = np.mean([mismatches_mean, deletions_mean, insertions_mean])
     total_min = np.min([mismatches_min, deletions_min, insertions_min])
-    total_max = np.min([mismatches_max, deletions_max, insertions_max])
+    total_max = np.max([mismatches_max, deletions_max, insertions_max])
 
     mean_coverage = np.mean(df["reads_all"])
     min_coverage = np.min(df["reads_all"])

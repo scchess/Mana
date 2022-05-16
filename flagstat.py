@@ -18,9 +18,11 @@ def parse(file):
     primary_duplicates = reads[5]
     mapped = reads[6]
     primary_mapped = reads[7]
+    unmapped = total - mapped
 
     return {"total": total,
             "primary": primary,
+            "unmapped": unmapped,
             "secondary": secondary,
             "supplementary": supplementary,
             "duplicates": duplicates,
