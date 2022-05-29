@@ -38,10 +38,14 @@ Let's download a sample alignment file:
     wget https://www.dropbox.com/s/25bvchax1wgvf5m/cDNA_UnMod_37C_NEBT7_BaseGfpmRNA_1strun_allpassedreads_sorted.bam?dl=1
     mv cDNA_UnMod_37C_NEBT7_BaseGfpmRNA_1strun_allpassedreads_sorted.bam?dl=1 sample.bam
 
+Let's use samtools to check the reference this BAM file was aligned to:
+
+    samtools view sample.bam 
+
 Use `docker` to show command-line usage:
 
     docker run mana python3 mana.py
-    
+
 Run an mRNA analysis:
 
     docker run -v ${PWD}:/src -i -t mana python3 mana.py --mrna -b sample.bam -f plasmid_gfp.fasta -m1 432 -m2 1635
