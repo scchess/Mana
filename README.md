@@ -16,7 +16,7 @@ docker is easy and straightforward. Docker will automatically work out the depen
 * Download docker from https://docs.docker.com/get-docker
 * Start a terminal and type `docker`.
 
-If your docker installation is successful, the `docker` command will generate the following 
+If your docker installation is successful, the `docker` command will show the following:
 
 ![alt text](docker.png)
 
