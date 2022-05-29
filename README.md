@@ -18,16 +18,17 @@ docker is easy and straightforward. Docker will automatically work out the depen
 
 If your docker installation is successful, the `docker` command will show the following:
 
-![alt text](docker.png)
+![Docker](docker.png)
 
-Make sure `docker` is running. Run the following to download the source and build this program on Docker.
+Run the following to download the source code of this program and build this program on Docker. Please note docker will
+install the dependencies for you.
 
 > :warning: Your docker may need `sudo` to run
 
     git clone https://github.com/scchess/Mana.git
     cd Mana
     docker build -t mana .
-    
+
 ## Quick Start (Docker)
 
 Docker will automatically build the software dependencies. Let's download a sample alignment file:
