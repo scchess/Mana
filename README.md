@@ -29,9 +29,11 @@ install the dependencies for you.
     cd Mana
     docker build -t mana .
 
-## Quick Start (Docker)
+Docker has now installed the program for you. Please check the next section on how to use Docker.
 
-Docker will automatically build the software dependencies. Let's download a sample alignment file:
+## Quick Start
+
+Let's download a sample alignment file:
 
     wget https://www.dropbox.com/s/25bvchax1wgvf5m/cDNA_UnMod_37C_NEBT7_BaseGfpmRNA_1strun_allpassedreads_sorted.bam?dl=1
     mv cDNA_UnMod_37C_NEBT7_BaseGfpmRNA_1strun_allpassedreads_sorted.bam?dl=1 sample.bam
