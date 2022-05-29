@@ -1,6 +1,6 @@
 ## Summary
 
-Command-line tool that analyses ONT alignments (.bam) to report the following quality control statistics.
+Command-line tool that analyses ONT alignments (.bam) to report quality control statistics.
 
 ## Installation
 
@@ -11,10 +11,14 @@ This program requires the following dependencies:
 * [bedtools](https://bedtools.readthedocs.io/en/latest/)
 
 The dependencies can be installed manually, however, an alternative is `docker`. Building this program on
-docker is easy and straightforward.
+docker is easy and straightforward. Docker will automatically work out the dependencies.
 
 * Download docker from https://docs.docker.com/get-docker
 * Start a terminal and type `docker`.
+
+If your docker installation is successful, the `docker` command will generate the following 
+
+![alt text](docker.png)
 
 Make sure `docker` is running. Run the following to download the source and build this program on Docker.
 
