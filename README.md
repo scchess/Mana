@@ -21,26 +21,28 @@ If your docker installation is successful, the `docker` command will show the fo
 ![Docker](docker.png)
 
 Run the following to download the source code of this program and build this program on Docker. Please note docker will
-install the dependencies for you.
+install the dependencies for you. If this is the first time you run Docker, the installation may take sometime. Please be patient as Docker creates an environment for you.
 
-> :warning: Your docker may need `sudo` to run
+> :warning: Your docker may need `sudo` to run.
 
     git clone https://github.com/scchess/Mana.git
     cd Mana
     docker build -t mana .
 
-Docker has now installed the program for you. Please check the next section on how to use Docker.
+Docker has now installed the program for you. Please follow the next section on how to use Docker.
 
 ## Quick Start
 
-Let's download a sample alignment file:
+Let's download a sample alignment file. This sample file came from a recent experiment from the Mercer lab.
 
     wget https://www.dropbox.com/s/25bvchax1wgvf5m/cDNA_UnMod_37C_NEBT7_BaseGfpmRNA_1strun_allpassedreads_sorted.bam?dl=1
     mv cDNA_UnMod_37C_NEBT7_BaseGfpmRNA_1strun_allpassedreads_sorted.bam?dl=1 sample.bam
 
 Let's use samtools to check the reference this BAM file was aligned to:
 
-    samtools view sample.bam 
+    samtools view sample.bam | cut -f3 | sort | uniq
+
+You should see all reads were aligned to the same `2021-8` plasmid reference.
 
 Use `docker` to show command-line usage:
 
