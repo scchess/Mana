@@ -10,15 +10,29 @@ def mRNA(x, cached=False):
     assert("bam") in x
     assert("fasta") in x
 
-    bam = x["bam"]
+    m1 = x["m1"]
+    m2 = x["m2"]
     bed = x["bed"]
+    bam = x["bam"]
     path = x["path"]
     fasta = x["fasta"]
     logger = x.get("logger")
 
-    assert(os.path.exists(bed))
     assert(os.path.exists(bam))
     assert(os.path.exists(fasta))
+
+    bed_ = path + os.sep + "intersect.bed"
+    sampled = path + os.sep + "sampled.bam"
+
+    with open(fasta) as r:
+        for line in r:
+            ref = line.split(" ")[0].replace(">", "")
+            with open(bed_, "w") as w:
+                w.write(ref + "\t" + str(m1) + "\t" + str(m2))
+                break
+
+    system("bedtools intersect -a " + bam + " -b " + bed_ + " | samtools view -bS - > " + sampled, logger)
+    bam = sampled
 
     coverage_path = path + os.sep + os.path.basename(bam) + "_coverage.txt"
     flagstat_path = path + os.sep + os.path.basename(bam) + "_flagstat.txt"

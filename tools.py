@@ -12,5 +12,8 @@ def formatDP(x):
 
 
 def system(cmd, w):
-    info(cmd, w)
-    os.system(cmd)
+    try:
+        info(cmd, w)
+        os.system(cmd)
+    except Exception:
+        pass

@@ -37,7 +37,7 @@ if __name__ == '__main__':
     elif not os.path.exists(args.b):
         raise Exception("File not existed: " + args.b)
 
-    tmp_path = "TMP"  # Where intermediate files are saved
+    tmp_path = ".mana"
     out_path = args.o  # Where output files are saved
 
     mode = "plasmid" if args.plasmid else "mRNA"
@@ -54,8 +54,8 @@ if __name__ == '__main__':
                   "path": tmp_path,
                   "log_path": log_path,
                   "report_path": report_path,
-                  "start": args.m1,
-                  "end": args.m2}
+                  "m1": args.m1,
+                  "m2": args.m2}
         tools.info(str(params), w1)
         txt = analysis.run(params)
         with open(report_path, "w") as w2:

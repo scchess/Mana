@@ -57,8 +57,8 @@ Generally, to run Mana with `docker`:
 
     docker run -v ${PWD}:/src -i -t mana <YOUR_USAGE>
 
-Simply replace `<YOUR_USAGE>` with your command line usage. For example, to print the help page:
+Replace `<YOUR_USAGE>` with your command line usage. For example, to print the help page:
 
     docker run -v ${PWD}:/src -i -t mana python3 mana.py -h
 
-where `<YOUR_USAGE>` is `python3 mana.py -h` in this example.
+`<YOUR_USAGE>` = `python3 mana.py -h` in this example.
