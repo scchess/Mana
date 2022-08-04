@@ -39,6 +39,7 @@ if __name__ == '__main__':
 
     tmp_path = ".mana"
     out_path = args.o  # Where output files are saved
+    os.system("mkdir -p " + tmp_path)
 
     mode = "plasmid" if args.plasmid else "mRNA"
     log_path = out_path + os.sep + "mrna_log.txt"
