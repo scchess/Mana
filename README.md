@@ -23,8 +23,6 @@ If your docker installation is successful, the `docker` command will show the fo
 Run the following to download the source code of this program and build this program on Docker. Please note docker will
 install the dependencies for you. If this is the first time you run Docker, the installation may take sometime. Please be patient as Docker creates an environment for you.
 
-> :warning: Your docker may need `sudo` to run.
-
     git clone https://github.com/scchess/Mana.git
     cd Mana
     docker build -t mana .
@@ -62,3 +60,7 @@ Replace `<YOUR_USAGE>` with your command line usage. For example, to print the h
     docker run -v ${PWD}:/src -i -t mana python3 mana.py -h
 
 `<YOUR_USAGE>` = `python3 mana.py -h` in this example.
+
+## Details
+
+The source code is based on `v2Pipeline260422.sh` from https://www.dropbox.com/s/ilazat2eg3lix5n/v2Pipeline260422%20%281%29.sh?dl=0.
