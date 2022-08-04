@@ -47,13 +47,25 @@ def mRNA(x, cached=False):
     if not cached:
         system("mkdir -p " + path, logger)
         system("samtools index " + bam, logger)
+
+        # samtools stats $outputpath/$samplefile/$samplefile'_allpassedreads.sam' > $outputpath/$samplefile/$samplefile'_allpassedreads_stats.txt'
         system("samtools stats " + bam + " > " + stats_path, logger)
+
+        # samtools coverage $outputpath/$samplefile/$samplefile'_allpassedreads_sorted.bam' > $outputpath/$samplefile/$samplefile'_allpassedreads_sorted_coverage.txt'
         system("samtools coverage " + bam + " > " + coverage_path, logger)
+
+        # samtools flagstat $outputpath/$samplefile/$samplefile'_allpassedreads_sorted.bam' > $outputpath/$samplefile/$samplefile'_allpassedreads_sorted_flagstat.txt'
         system("samtools flagstat " + bam + " > " + flagstat_path, logger)
+
+        # samtools depth -a $outputpath/$samplefile/$samplefile'_allpassedreads_sorted.bam' > $outputpath/$samplefile/$samplefile'_allpassedreads_sorted_depth.txt'
         system("samtools depth " + bam + " > " + depth_path, logger)
+
+        # pysamstats --max-depth=3000000 --fasta $referencepath/$referencefile'.fasta' --type variation $outputpath/$samplefile/$samplefile'_allpassedreads_sorted.bam' > $outputpath/$samplefile/$samplefile'_allpassedreads_sorted_pysam.txt'
         system("pysamstats --max-depth=3000000 --fasta " + fasta + " --type variation " + bam + " > " + pysam_path, logger)
+
         system("bedtools intersect -a " + bam + " -b " + bed + " > " + on_target_path, logger)
         system("bedtools intersect -a " + bam + " -v -b " + bed + " > " + off_target_path, logger)
+
         system("samtools index " + on_target_path, logger)
         system("samtools index " + off_target_path, logger)
         system("samtools flagstat " + on_target_path + " > " + on_target_flagstat_path, logger)
