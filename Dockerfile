@@ -28,7 +28,10 @@ RUN wget https://github.com/arq5x/bedtools2/releases/download/v2.30.0/bedtools-2
 RUN conda install -c bioconda pysamstats && \
     conda install -c anaconda pytest && \
     conda install -c anaconda pandas  && \
+    conda install -c bioconda bcftools && \
     conda install -c conda-forge tabulate
+
+RUN pip3 install nanosim-h
 
 WORKDIR /src
 COPY . /src
