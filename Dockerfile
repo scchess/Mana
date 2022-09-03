@@ -25,10 +25,10 @@ RUN wget https://github.com/arq5x/bedtools2/releases/download/v2.30.0/bedtools-2
     make && \
     cp bin/bedtools /usr/local/bin
 
-RUN conda install -c bioconda pysamstats
-RUN conda install -c anaconda pytest
-RUN conda install -c anaconda pandas
-RUN conda install -c conda-forge tabulate
+RUN conda install -c bioconda pysamstats && \
+    conda install -c anaconda pytest && \
+    conda install -c anaconda pandas  && \
+    conda install -c conda-forge tabulate
 
 WORKDIR /src
 COPY . /src
