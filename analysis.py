@@ -1,101 +1,52 @@
 import os
+# import tools
 import report
+import settings
 import flagstat
 import samtools
+import bcftools
+import integrity
 import pysamstats
-from tools import system
 
 
-def mRNA(x, cached=False):
-    assert("bam") in x
-    assert("fasta") in x
-
-    m1 = x["m1"]
-    m2 = x["m2"]
-    bed = x["bed"]
-    bam = x["bam"]
-    path = x["path"]
-    fasta = x["fasta"]
-    logger = x.get("logger")
-
+def run(ref, bam, mode, cached=False):
+    assert(os.path.exists(ref))
     assert(os.path.exists(bam))
-    assert(os.path.exists(fasta))
+    assert(mode == "mRNA" or mode == "plasmid")
 
-    bed_ = path + os.sep + "intersect.bed"
-    sampled = path + os.sep + "sampled.bam"
+    x1 = samtools.run(bam, cached)
+    x2 = pysamstats.run(ref, bam, cached)
+    x3 = bcftools.run(ref, bam, cached)
 
-    with open(fasta) as r:
-        for line in r:
-            ref = line.split(" ")[0].replace(">", "")
-            with open(bed_, "w") as w:
-                w.write(ref + "\t" + str(m1) + "\t" + str(m2))
-                break
+    depth_path = x1["depth_path"]
+    stats_path = x1["stats_path"]
+    pysam_path = x2["pysam_path"]
+    coverage_path = x1["coverage_path"]
+    flagstat_path = x1["flagstat_path"]
+    consensus_path = x3["consensus_path"]
 
-    system("bedtools intersect -a " + bam + " -b " + bed_ + " | samtools view -bS - > " + sampled, logger)
-    bam = sampled
-
-    coverage_path = path + os.sep + os.path.basename(bam) + "_coverage.txt"
-    flagstat_path = path + os.sep + os.path.basename(bam) + "_flagstat.txt"
-    depth_path = path + os.sep + os.path.basename(bam) + "_depth.txt"
-    pysam_path = path + os.sep + os.path.basename(bam) + "_pysam.txt"
-    stats_path = path + os.sep + os.path.basename(bam) + "_stats.txt"
-    on_target_path = path + os.sep + os.path.basename(bam) + "_on_target.bam"
-    off_target_path = path + os.sep + os.path.basename(bam) + "_off_target.bam"
-    on_target_flagstat_path = path + os.sep + os.path.basename(bam) + "_on_target_flagstat.txt"
-    off_target_flagstat_path = path + os.sep + os.path.basename(bam) + "_off_target_flagstat.txt"
-
-    if not cached:
-        system("mkdir -p " + path, logger)
-        system("samtools index " + bam, logger)
-
-        # samtools stats $outputpath/$samplefile/$samplefile'_allpassedreads.sam' > $outputpath/$samplefile/$samplefile'_allpassedreads_stats.txt'
-        system("samtools stats " + bam + " > " + stats_path, logger)
-
-        # samtools coverage $outputpath/$samplefile/$samplefile'_allpassedreads_sorted.bam' > $outputpath/$samplefile/$samplefile'_allpassedreads_sorted_coverage.txt'
-        system("samtools coverage " + bam + " > " + coverage_path, logger)
-
-        # samtools flagstat $outputpath/$samplefile/$samplefile'_allpassedreads_sorted.bam' > $outputpath/$samplefile/$samplefile'_allpassedreads_sorted_flagstat.txt'
-        system("samtools flagstat " + bam + " > " + flagstat_path, logger)
-
-        # samtools depth -a $outputpath/$samplefile/$samplefile'_allpassedreads_sorted.bam' > $outputpath/$samplefile/$samplefile'_allpassedreads_sorted_depth.txt'
-        system("samtools depth " + bam + " > " + depth_path, logger)
-
-        # pysamstats --max-depth=3000000 --fasta $referencepath/$referencefile'.fasta' --type variation $outputpath/$samplefile/$samplefile'_allpassedreads_sorted.bam' > $outputpath/$samplefile/$samplefile'_allpassedreads_sorted_pysam.txt'
-        system("pysamstats --max-depth=3000000 --fasta " + fasta + " --type variation " + bam + " > " + pysam_path, logger)
-
-        system("bedtools intersect -a " + bam + " -b " + bed + " > " + on_target_path, logger)
-        system("bedtools intersect -a " + bam + " -v -b " + bed + " > " + off_target_path, logger)
-
-        system("samtools index " + on_target_path, logger)
-        system("samtools index " + off_target_path, logger)
-        system("samtools flagstat " + on_target_path + " > " + on_target_flagstat_path, logger)
-        system("samtools flagstat " + off_target_path + " > " + off_target_flagstat_path, logger)
-
-    assert(os.path.exists(depth_path))
     assert(os.path.exists(pysam_path))
+    assert(os.path.exists(depth_path))
     assert(os.path.exists(stats_path))
     assert(os.path.exists(coverage_path))
     assert(os.path.exists(flagstat_path))
-    assert(os.path.exists(on_target_flagstat_path))
-    assert(os.path.exists(off_target_flagstat_path))
+    assert(os.path.exists(consensus_path))
 
-    pysam1 = pysamstats.parse(pysam_path)
-    flag1 = flagstat.parse(flagstat_path)
-    flag2 = flagstat.parse(on_target_flagstat_path)
-    flag3 = flagstat.parse(off_target_flagstat_path)
-    stats1 = samtools.parse(stats_path)
+    if mode == "mRNA":
+        x4 = integrity.run(file)
+
 
     return {"pysam1": pysam1, "flag1": flag1, "flag2": flag2, "flag3": flag3, "stats1": stats1}
 
 
-def run(x):
+def run__(x):
     assert(x["mode"] == "mRNA" or x["mode"] == "plasmid")
     assert("bam" in x)
-    assert("bed" in x)
     assert("path" in x)
     assert("fasta" in x)
     assert("log_path" in x)
     assert("report_path" in x)
+
     if x["mode"] == "mRNA":
         data = mRNA(x)
         pysam1 = data["pysam1"]

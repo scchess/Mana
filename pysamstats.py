@@ -1,7 +1,15 @@
 import os
+import tools
+import settings
 import numpy as np
 import pandas as pd
 
+
+PYSAM_PATH = settings.TMP_PATH + os.sep + "{}_pysam.txt"
+
+
+def run(fasta, file, cached=False):
+ 
 
 def parse(file):
     assert(os.path.exists(file))
