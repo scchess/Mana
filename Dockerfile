@@ -8,7 +8,13 @@ RUN apt-get update && \
     apt-get install -y libbz2-dev && \
     apt-get install -y libxml2-dev && \
     apt-get install -y libncurses5-dev && \
-    apt-get install -y build-essential
+    apt-get install -y build-essential && \
+    apt-get install -y python2 && \
+    apt-get install -y python3.9 && \
+    apt-get install -y python3-pip && \
+    apt-get install python-is-python3 && \
+    apt-get install -y libcurl4-openssl-dev && \
+    apt-get install -y python3-dev
 
 RUN git clone https://github.com/lh3/minimap2.git && \
     cd minimap2 && \
@@ -34,15 +40,12 @@ RUN wget https://github.com/samtools/bcftools/releases/download/1.16/bcftools-1.
     make && \
     cp bcftools /usr/local/bin/
 
-RUN apt-get install -y python2
-RUN apt-get install -y python3.9
-RUN apt-get install -y python3-pip
-RUN apt-get install python-is-python3
-RUN pip3 install nanosim-h
-RUN pip3 install cython
-RUN apt-get install -y libcurl4-openssl-dev
-RUN pip3 install "setuptools<58.0.0"
-RUN apt-get install -y python3-dev
+RUN pip3 install nanosim-h && \
+    pip3 install cython && \
+    pip3 install "setuptools<58.0.0" && \
+    pip3 install pytest && \
+    pip3 install pandas && \
+    pip3 install tabulate
 
 RUN wget https://github.com/arq5x/bedtools2/releases/download/v2.30.0/bedtools-2.30.0.tar.gz && \
     tar -xzf bedtools-2.30.0.tar.gz && \
@@ -53,16 +56,13 @@ RUN wget https://github.com/arq5x/bedtools2/releases/download/v2.30.0/bedtools-2
 RUN wget https://repo.anaconda.com/miniconda/Miniconda3-py39_4.12.0-Linux-x86_64.sh && \
     bash Miniconda3-py39_4.12.0-Linux-x86_64.sh -b
 
-RUN /root/miniconda3/bin/conda config --add channels defaults
-RUN /root/miniconda3/bin/conda config --add channels conda-forge
-RUN /root/miniconda3/bin/conda config --add channels bioconda
-RUN /root/miniconda3/bin/conda install -y pysam
-RUN /root/miniconda3/bin/conda install -y pysamstats
+RUN /root/miniconda3/bin/conda config --add channels defaults && \
+    /root/miniconda3/bin/conda config --add channels conda-forge && \
+    /root/miniconda3/bin/conda config --add channels bioconda && \
+    /root/miniconda3/bin/conda install -y pysam && \
+    /root/miniconda3/bin/conda install -y pysamstats
 
 ENV PATH "$PATH:/root/miniconda3/bin"
-RUN pip3 install pytest
-RUN pip3 install pandas
-RUN pip3 install tabulate
 
 WORKDIR /src
 COPY . /src
