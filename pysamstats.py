@@ -9,7 +9,20 @@ PYSAM_PATH = settings.TMP_PATH + os.sep + "{}_pysam.txt"
 
 
 def run(fasta, file, cached=False):
- 
+    assert(os.path.exists(file))
+    pysam_path = PYSAM_PATH.format(os.path.basename(file))
+
+    if not cached:
+        tools.run("pysamstats --max-depth=300000000 --fasta " + fasta + " --type variation " + file + " > " + pysam_path)
+
+    assert(os.path.exists(pysam_path))
+    stats = parse(pysam_path)
+
+    return {"file": file,
+            "fasta": fasta,
+            "stats": stats,
+            "pysam_path": pysam_path}
+
 
 def parse(file):
     assert(os.path.exists(file))

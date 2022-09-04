@@ -11,8 +11,8 @@ def run(ref, file, cached=False):
     assert(os.path.exists(ref))
     assert(os.path.exists(file))
 
-    consensus_path = BCFTOOLS_CONSENSUS.format(file)
-    variants_path = BCFTOOLS_VARIANT.format(file)
+    consensus_path = BCFTOOLS_CONSENSUS.format(os.path.basename(file))
+    variants_path = BCFTOOLS_VARIANT.format(os.path.basename(file))
 
     if not cached:
         cmd = "bcftools mpileup -d 300000000 --no-BAQ --min-BQ 0 -Ou -f {} {} | bcftools call -c -M --ploidy 1 -Oz -o {}"
