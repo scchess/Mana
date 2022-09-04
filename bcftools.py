@@ -3,8 +3,8 @@ import tools
 import settings
 
 
-BCFTOOLS_VARIANT = settings.TMP_PATH + os.sep + "{}_variants.vcf"
-BCFTOOLS_CONSENSUS = settings.TMP_PATH + os.sep + "{}_consensus.fa"
+BCFTOOLS_VARIANT = settings.TMP_PATH() + os.sep + "{}_variants.vcf.gz"
+BCFTOOLS_CONSENSUS = settings.TMP_PATH() + os.sep + "{}_consensus.fa"
 
 
 def run(ref, file, cached=False):
@@ -23,8 +23,9 @@ def run(ref, file, cached=False):
         cmd = cmd.format(variants_path)
         tools.run(cmd)
 
-        cmd = "bcftools consensus -a - -f {} {} > {}"
-        cmd = cmd.replace(ref, variants_path, consensus_path)
+        cmd = "bcftools consensus -f {} {} > {}"
+        cmd = cmd.format(ref, variants_path, consensus_path)
+        tools.run(cmd)
 
     assert(os.path.exists(consensus_path))
     return {"consensus_path": consensus_path, "variants_path": variants_path}

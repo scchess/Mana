@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 
 
-PYSAM_PATH = settings.TMP_PATH + os.sep + "{}_pysam.txt"
+PYSAM_PATH = settings.TMP_PATH() + os.sep + "{}_pysam.txt"
 
 
 def run(fasta, file, cached=False):

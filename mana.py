@@ -1,5 +1,6 @@
 import os
 import tools
+import settings
 import analysis
 import argparse
 
@@ -36,13 +37,8 @@ if __name__ == '__main__':
     elif not os.path.exists(args.b):
         raise Exception("File not existed: " + args.b)
 
-    tmp_path = ".mana"
-    out_path = args.o  # Where output files are saved
-    os.system("mkdir -p " + tmp_path)
-
+    settings._OUT_PATH = args.o
     mode = "plasmid" if args.plasmid else "mRNA"
-    log_path = out_path + os.sep + "mrna_log.txt"
-    report_path = out_path + os.sep + ("mrna_results.txt" if mode == "mRNA" else "plasmid_results.txt")
 
     if args.ref is None:
         if mode == "plasmid":
@@ -54,8 +50,5 @@ if __name__ == '__main__':
         args.ecoil = "data/GCF_000005845.2_ASM584v2_genomic.fna"
 
     os.system("mkdir -p " + args.o)
-    with open(log_path, "w") as w1:
-        txt = analysis.run(args.ref, args.ecoil, args.b, mode)
-        with open(report_path, "w") as w2:
-            w2.write(txt)
-        tools.info("Generated: " + report_path)
+    tools.info(mode)
+    analysis.run(args.ref, args.ecoil, args.b, mode)

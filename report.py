@@ -16,8 +16,8 @@ def run(samtools, pysamstats, bedtools, mode):
 
     txt = txt.replace("@@Alignments@@", samtools["file"])
     txt = txt.replace("@@Reference@@", pysamstats["fasta"])
-    txt = txt.replace("@@LogPath@@", settings.LOG_FILE)
-    txt = txt.replace("@@ReportPath@@", settings.REPORT_FILE)
+    txt = txt.replace("@@LogPath@@", settings.LOG_FILE())
+    txt = txt.replace("@@ReportPath@@", settings.REPORT_FILE())
 
     txt = txt.replace("@@TotalReads@@", str(samtools_flag["total"]))
     txt = txt.replace("@@MappedReads@@", str(samtools_flag["mapped"]))

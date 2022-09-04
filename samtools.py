@@ -4,11 +4,11 @@ import settings
 import pandas as pd
 
 
-DEPTH_PATH = settings.TMP_PATH + os.sep + "{}_depth.txt"
-STATS_PATH = settings.TMP_PATH + os.sep + "{}_stats.txt"
-COVERAGE_PATH = settings.TMP_PATH + os.sep + "{}_coverage.txt"
-FLAGSTAT_PATH = settings.TMP_PATH + os.sep + "{}_flagstat.txt"
-UNMAPPED_BAM_PATH = settings.TMP_PATH + os.sep + "{}_unmapped.bam"
+DEPTH_PATH = settings.TMP_PATH() + os.sep + "{}_depth.txt"
+STATS_PATH = settings.TMP_PATH() + os.sep + "{}_stats.txt"
+COVERAGE_PATH = settings.TMP_PATH() + os.sep + "{}_coverage.txt"
+FLAGSTAT_PATH = settings.TMP_PATH() + os.sep + "{}_flagstat.txt"
+UNMAPPED_BAM_PATH = settings.TMP_PATH() + os.sep + "{}_unmapped.bam"
 
 
 def parse_stats(file):
@@ -77,9 +77,9 @@ def run(file, cached=False):
     assert(os.path.exists(unmapped_path))
 
     stats = parse_stats(stats_path)
-    pd_depth = pd.read_csv(depth_path, "\t")
+    pd_depth = pd.read_csv(depth_path, sep="\t")
     flag_stat = parse_flagstat(flagstat_path)
-    pd_coverage = pd.read_csv(coverage_path, "\t")
+    pd_coverage = pd.read_csv(coverage_path, sep="\t")
 
     #ecoil = "data/GCF_000005845.2_ASM584v2_genomic.fna"
     #assert(os.path.exists(ecoil))

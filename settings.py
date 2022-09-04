@@ -1,7 +1,21 @@
 import os
 
-LOG_FILE = "mrna_log.txt"
-REPORT_FILE = "report.txt"
-TMP_PATH = ".mana"
+_OUT_PATH = "."
 
-os.system("mkdir -p " + TMP_PATH)
+
+def TMP_PATH():
+    os.system("mkdir -p .mana")
+    return ".mana"
+
+
+def OUT_PATH():
+    os.system("mkdir -p " + _OUT_PATH)
+    return _OUT_PATH
+
+
+def LOG_FILE():
+    return OUT_PATH() + os.sep + "mrna_log.txt"
+
+
+def REPORT_FILE():
+    return OUT_PATH() + os.sep + "report.txt"

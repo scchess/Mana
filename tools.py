@@ -9,7 +9,7 @@ def formatDP(x):
 def info(x):
     x = "[INFO]: " + x
     print(x)
-    with open(settings.LOG_FILE, "a") as w:
+    with open(settings.LOG_FILE(), "a") as w:
         w.write(x + "\n")
 
 
