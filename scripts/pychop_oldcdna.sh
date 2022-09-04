@@ -46,9 +46,9 @@ done
 
 # Join passed fastq files from each barcode then rename and save in appropriate sample folder
 for i in ${!barcode_arr[@]}; do
-barcodefile=${barcode_arr[i]}
-samplefile=${sample_arr[i]}
-zcat $passpath/$barcodefile/*fastq.gz > $outputpath/$samplefile/$samplefile'_allpassedreads.fastq.gz'
+    barcodefile=${barcode_arr[i]}
+    samplefile=${sample_arr[i]}
+    zcat $passpath/$barcodefile/*fastq.gz > $outputpath/$samplefile/$samplefile'_allpassedreads.fastq.gz'
 done
 
 # Join failed fastq files from each barcode then rename and save in appropriate sample folder
@@ -60,10 +60,10 @@ done
 
 # change file name to .fastq
 for i in ${!barcode_arr[@]}; do
-barcodefile=${barcode_arr[i]}
-samplefile=${sample_arr[i]}
-cat $outputpath/$samplefile/$samplefile'_allpassedreads.fastq.gz' > $outputpath/$samplefile/$samplefile'_allpassedreads.fastq'
-cat $outputpath/$samplefile/$samplefile'_allfailedreads.fastq.gz' > $outputpath/$samplefile/$samplefile'_allfailedreads.fastq'
+    barcodefile=${barcode_arr[i]}
+    samplefile=${sample_arr[i]}
+    cat $outputpath/$samplefile/$samplefile'_allpassedreads.fastq.gz' > $outputpath/$samplefile/$samplefile'_allpassedreads.fastq'
+    cat $outputpath/$samplefile/$samplefile'_allfailedreads.fastq.gz' > $outputpath/$samplefile/$samplefile'_allfailedreads.fastq'
 done
 
 #pychopper
@@ -75,10 +75,10 @@ done
 
 # Join rescued and full length fastq files made by pychopper from each barcode then rename and save in appropriate sample folder
 for i in ${!barcode_arr[@]}; do
-barcodefile=${barcode_arr[i]}
-samplefile=${sample_arr[i]}
-cat $outputpath/$samplefile/$samplefile'_passedreads_pychop_oldcdn_rescued.fastq' $outputpath/$samplefile/$samplefile'_allpassedreads_pychop_oldcdn_full_length.fastq' > $outputpath/$samplefile/$samplefile'_allpassedreads_pychop_oldcdn_joined.fastq'
-cat $outputpath/$samplefile/$samplefile'_failedreads_pychop_oldcdn_rescued.fastq' $outputpath/$samplefile/$samplefile'_allfailedreads_pychop_oldcdn_full_length.fastq' > $outputpath/$samplefile/$samplefile'_allfailedreads_pychop_oldcdn_joined.fastq'
+    barcodefile=${barcode_arr[i]}
+    samplefile=${sample_arr[i]}
+    cat $outputpath/$samplefile/$samplefile'_passedreads_pychop_oldcdn_rescued.fastq' $outputpath/$samplefile/$samplefile'_allpassedreads_pychop_oldcdn_full_length.fastq' > $outputpath/$samplefile/$samplefile'_allpassedreads_pychop_oldcdn_joined.fastq'
+    cat $outputpath/$samplefile/$samplefile'_failedreads_pychop_oldcdn_rescued.fastq' $outputpath/$samplefile/$samplefile'_allfailedreads_pychop_oldcdn_full_length.fastq' > $outputpath/$samplefile/$samplefile'_allfailedreads_pychop_oldcdn_joined.fastq'
 done
 
 # Running minimap2 align fastq to reference fasta and make sam file in correct directory for all passed reads
@@ -99,7 +99,7 @@ for i in ${!sample_arr[@]}; do
     # create samtools stats file for the sam file for all passed reads
     samtools stats $outputpath/$samplefile/$samplefile'_passed_pychop_oldcdn.sam' > $outputpath/$samplefile/$samplefile'_passed_pychop_oldcdn_stats.txt'
     samtools stats $outputpath/$samplefile/$samplefile'_failed_pychop_oldcdn.sam' > $outputpath/$samplefile/$samplefile'_failed_pychop_oldcdn_stats.txt'
-    # create a bam file from the sam file  for all passed reads
+    # create a bam file from the sam file for all passed reads
     samtools view -S -b $outputpath/$samplefile/$samplefile'_passed_pychop_oldcdn.sam' > $outputpath/$samplefile/$samplefile'_passed_pychop_oldcdn.bam'
     samtools view -S -b $outputpath/$samplefile/$samplefile'_failed_pychop_oldcdn.sam' > $outputpath/$samplefile/$samplefile'_failed_pychop_oldcdn.bam'
     # sort the bam file for all passed reads
@@ -186,10 +186,12 @@ for i in ${!endbed_arr[@]}; do
     bedtools intersect -a $outputpath/$samplefile/$samplefile'_passed_pychop_oldcdn_startcoord.bam' -b $bedpath/$endbedfile'.bed' > $outputpath/$samplefile/$samplefile'_passed_pychop_oldcdn_full_length_reads.bam'
     samtools index $outputpath/$samplefile/$samplefile'_passed_pychop_oldcdn_full_length_reads.bam'
     samtools flagstat $outputpath/$samplefile/$samplefile'_passed_pychop_oldcdn_full_length_reads.bam' > $outputpath/$samplefile/$samplefile'_passed_pychop_oldcdn_full_length_reads_flagstat.txt'
+
     ##### Get possibly degraded has a start but No_3utr_overlap reads bam --intersect start coord bam with endutr.bed file but pull out the reads that DONT INTERSECT option -v  ---- index and flagstat
     bedtools intersect -a $outputpath/$samplefile/$samplefile'_passed_pychop_oldcdn_startcoord.bam' -b $bedpath/$endbedfile'.bed' -v > $outputpath/$samplefile/$samplefile'_passed_pychop_oldcdn_Has_start_No_3utr_overlap_reads.bam'
     samtools index $outputpath/$samplefile/$samplefile'_passed_pychop_oldcdn_Has_start_No_3utr_overlap_reads.bam'
     samtools flagstat $outputpath/$samplefile/$samplefile'_passed_pychop_oldcdn_Has_start_No_3utr_overlap_reads.bam' > $outputpath/$samplefile/$samplefile'_passed_pychop_oldcdn_Has_start_No_3utr_overlap_reads_flagstat.txt'
+
     ##### intersect all reads bam with reads overlapping at 3utr end coordinate from end.bed file make a bam and index and flagstat
     bedtools intersect -a $outputpath/$samplefile/$samplefile'_passed_pychop_oldcdn_sorted.bam' -b $bedpath/$endbedfile'.bed' > $outputpath/$samplefile/$samplefile'_passed_pychop_oldcdn_3utrendcoord.bam'
     samtools index $outputpath/$samplefile/$samplefile'_passed_pychop_oldcdn_3utrendcoord.bam'
@@ -253,12 +255,12 @@ done
 
 #Add variant calling and consensus generation
 for i in ${!reference_arr[@]}; do
-referencefile=${reference_arr[i]}
-samplefile=${sample_arr[i]}
-bcftools mpileup -d 300000000 --no-BAQ --min-BQ 0 -Ou -f $referencepath/$referencefile'.fasta' $outputpath/$samplefile/$samplefile'_allpassedreads_sorted.bam' | bcftools call -c -M --ploidy 1 -Oz -o $outputpath/$samplefile/$samplefile'_allpassedreads_sorted_VCF.vcf.gz'
-bcftools index $outputpath/$samplefile/$samplefile'_allpassedreads_sorted_VCF.vcf.gz'
-bcftools norm -f $referencepath/$referencefile'.fasta' $outputpath/$samplefile/$samplefile'_allpassedreads_sorted_VCF.vcf.gz' -Ob -o $outputpath/$samplefile/$samplefile'_allpassedreads_sorted_BCF.bcf'
-bcftools consensus -a - -f $referencepath/$referencefile'.fasta' $outputpath/$samplefile/$samplefile'_allpassedreads_sorted_VCF.vcf.gz' > $outputpath/$samplefile/$samplefile'_allpassedreads_sorted_BCF_consensus.fa'
+    referencefile=${reference_arr[i]}
+    samplefile=${sample_arr[i]}
+    bcftools mpileup -d 300000000 --no-BAQ --min-BQ 0 -Ou -f $referencepath/$referencefile'.fasta' $outputpath/$samplefile/$samplefile'_allpassedreads_sorted.bam' | bcftools call -c -M --ploidy 1 -Oz -o $outputpath/$samplefile/$samplefile'_allpassedreads_sorted_VCF.vcf.gz'
+    bcftools index $outputpath/$samplefile/$samplefile'_allpassedreads_sorted_VCF.vcf.gz'
+    bcftools norm -f $referencepath/$referencefile'.fasta' $outputpath/$samplefile/$samplefile'_allpassedreads_sorted_VCF.vcf.gz' -Ob -o $outputpath/$samplefile/$samplefile'_allpassedreads_sorted_BCF.bcf'
+    bcftools consensus -a - -f $referencepath/$referencefile'.fasta' $outputpath/$samplefile/$samplefile'_allpassedreads_sorted_VCF.vcf.gz' > $outputpath/$samplefile/$samplefile'_allpassedreads_sorted_BCF_consensus.fa'
 done
 
 #!/bin/bash
