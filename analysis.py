@@ -40,7 +40,7 @@ def run(ref, ecoil, bam, mode, cached=True):
     assert(os.path.exists(consensus_path))
 
     with open(settings.REPORT_FILE(), "w") as w:
-        w.write(report.run(x1, x2, x3, mode))
+        w.write(report.run(x1, x2, x3, x4, mode))
     tools.info("Generated: " + settings.REPORT_FILE())
 
     return {"bed_path": bed_path,

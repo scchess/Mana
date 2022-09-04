@@ -8,7 +8,12 @@ DEPTH_PATH = settings.TMP_PATH() + os.sep + "{}_depth.txt"
 STATS_PATH = settings.TMP_PATH() + os.sep + "{}_stats.txt"
 COVERAGE_PATH = settings.TMP_PATH() + os.sep + "{}_coverage.txt"
 FLAGSTAT_PATH = settings.TMP_PATH() + os.sep + "{}_flagstat.txt"
-UNMAPPED_BAM_PATH = settings.TMP_PATH() + os.sep + "{}_unmapped.bam"
+READ_LENGTH_PATH = settings.TMP_PATH() + os.sep + "{}_length.txt"
+READ_LENGTH_R = settings.TMP_PATH() + os.sep + "{}_length.R"
+READ_LENGTH_SVG = settings.TMP_PATH() + os.sep + "{}_length.svg"
+UNMAPPED_PATH = settings.TMP_PATH() + os.sep + "{}_unmapped.fq"
+REALIGNED_PATH = settings.TMP_PATH() + os.sep + "{}_religned.bam"
+REALIGNED_STATS_PATH = settings.TMP_PATH() + os.sep + "{}_aligned_stats.txt"
 
 
 def parse_stats(file):
@@ -59,7 +64,24 @@ def run(file, cached=False):
     stats_path = STATS_PATH.format(os.path.basename(file))
     coverage_path = COVERAGE_PATH.format(os.path.basename(file))
     flagstat_path = FLAGSTAT_PATH.format(os.path.basename(file))
-    unmapped_path = UNMAPPED_BAM_PATH.format(os.path.basename(file))
+    unmapped_path = UNMAPPED_PATH.format(os.path.basename(file))
+    realigned_path = REALIGNED_PATH.format(os.path.basename(file))
+    read_length_path = READ_LENGTH_PATH.format(os.path.basename(file))
+    read_length_R = READ_LENGTH_R.format(os.path.basename(file))
+    read_length_svg = READ_LENGTH_SVG.format(os.path.basename(file))
+    realigned_stats_path = REALIGNED_STATS_PATH.format(os.path.basename(file))
+
+    ecoil = "data/GCF_000005845.2_ASM584v2_genomic.fna"
+    assert(os.path.exists(ecoil))
+
+    read_count = "read_length.R"
+    assert(os.path.exists(read_count))
+
+    with open(read_count) as r:
+        R = r.read().replace("@@File@@", read_length_path).replace("@@Output@@", read_length_svg)
+
+    with open(read_length_R, "w") as w:
+        w.write(R)
 
     if not cached:
         tools.run("samtools index " + file)
@@ -67,25 +89,24 @@ def run(file, cached=False):
         tools.run("samtools stats " + file + " > " + stats_path)
         tools.run("samtools coverage " + file + " > " + coverage_path)
         tools.run("samtools flagstat " + file + " > " + flagstat_path)
-        tools.run("samtools view -b -f 4 " + file + " > " + unmapped_path)
-        tools.run("samtools index " + unmapped_path)
+        tools.run("samtools view -F 2048 " + file + " | awk '{print length($10)}'| sort -n | uniq -c |awk ' { t = $1; $1 = $2; $2 = t; print; } '|tr ' ' '\t'|sed '1d' > " + read_length_path)
+        tools.run("Rscript " + read_length_R)
+        tools.run("samtools view -b -f 4 " + file + " | samtools fastq > " + unmapped_path)
+        tools.run("minimap2 -ax map-ont " + ecoil + " " + unmapped_path + " | samtools view -bS > " + realigned_path)
+        tools.run("samtools stats " + realigned_path + " > " + realigned_stats_path)
 
     assert(os.path.exists(depth_path))
     assert(os.path.exists(stats_path))
     assert(os.path.exists(coverage_path))
     assert(os.path.exists(flagstat_path))
     assert(os.path.exists(unmapped_path))
+    assert(os.path.exists(read_length_svg))
+    assert(os.path.exists(realigned_stats_path))
 
     stats = parse_stats(stats_path)
     pd_depth = pd.read_csv(depth_path, sep="\t")
     flag_stat = parse_flagstat(flagstat_path)
     pd_coverage = pd.read_csv(coverage_path, sep="\t")
-
-    #ecoil = "data/GCF_000005845.2_ASM584v2_genomic.fna"
-    #assert(os.path.exists(ecoil))
-
-    # if not cached:
-    #    tools.run("minimap2 -ax map-ont " + ecoil + " " + unmapped_path + " > $outputpath/$samplefile/$samplefile'_allpassedreads.sam'")
 
     return {"file": file,
             "stats": stats,
@@ -94,6 +115,8 @@ def run(file, cached=False):
             "depth_path": depth_path,
             "stats_path": stats_path,
             "pd_coverage": pd_coverage,
+            "realigned_stats_path": realigned_stats_path,
+            "read_length_svg": read_length_svg,
             "coverage_path": coverage_path,
             "flagstat_path": flagstat_path,
             "unmapped_path": unmapped_path}

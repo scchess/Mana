@@ -1,3 +1,4 @@
+import os
 import sys
 import settings
 import pandas as pd
@@ -6,10 +7,12 @@ from tabulate import tabulate
 tabulate.PRESERVE_WHITESPACE = True
 
 
-def run(samtools, pysamstats, bedtools, mode):
+def run(samtools, pysamstats, bedtools, bcftools, mode):
     assert(mode == "mRNA" or mode == "plasmid")
     with open("report.txt") as r:
         txt = r.read()
+
+    os.system("cp " + bcftools["consensus_path"] + " " + settings.OUT_PATH())
 
     pysam_stats = pysamstats["stats"]
     samtools_stats = samtools["stats"]
@@ -21,6 +24,7 @@ def run(samtools, pysamstats, bedtools, mode):
     txt = txt.replace("@@Reference@@", pysamstats["fasta"])
     txt = txt.replace("@@LogPath@@", settings.LOG_FILE())
     txt = txt.replace("@@ReportPath@@", settings.REPORT_FILE())
+    txt = txt.replace("@@Consensus@@", settings.OUT_PATH() + os.sep + os.path.basename(bcftools["consensus_path"]))
 
     txt = txt.replace("@@TotalReads@@", str(samtools_flag["total"]))
     txt = txt.replace("@@MappedReads@@", str(samtools_flag["mapped"]))

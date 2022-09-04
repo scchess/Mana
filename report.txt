@@ -9,6 +9,7 @@ Alignments                  @@Alignments@@
 Reference                   @@Reference@@
 Analysis Log                @@LogPath@@
 Results                     @@ReportPath@@
+Consensus                   @@Consensus@@
 
 Run Performance
 Total Reads                 @@TotalReads@@
@@ -21,9 +22,17 @@ Max Coverage                @@MaxCoverage@@
 
 Error Performance per Nucleotide
 @@Table1@@
-
 Notes	 	 	 
 Error = mismatch + insertion + deletion			
 Mismatch does not include deletion			
+
+Mapping to E.coil
+Total Reads                 @@E_TotalReads@@
+Mapped Reads                @@E_MappedReads@@
+Unmapped Reads              @@E_UnmappedReads@@
+Read Length Average         @@E_ReadLengthAverage@@
+Average Coverage            @@E_AverageCoverage@@
+Min Coverage                @@E_MinCoverage@@
+Max Coverage                @@E_MaxCoverage@@
 
 @@Table2@@
