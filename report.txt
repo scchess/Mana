@@ -1,4 +1,8 @@
-mRNA Sequencing Results – cDNA unmodified
+Mana Sequencing Results
+
+General
+Mode                        @@Mode@@
+Command                     @@Command@@
 
 File Locations
 Alignments                  @@Alignments@@

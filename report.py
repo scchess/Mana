@@ -1,3 +1,4 @@
+import sys
 import settings
 import pandas as pd
 from tools import formatDP
@@ -14,6 +15,8 @@ def run(samtools, pysamstats, bedtools, mode):
     samtools_stats = samtools["stats"]
     samtools_flag = samtools["flag_stat"]
 
+    txt = txt.replace("@@Mode@@", mode)
+    txt = txt.replace("@@Command@@", " ".join(sys.argv[:]))
     txt = txt.replace("@@Alignments@@", samtools["file"])
     txt = txt.replace("@@Reference@@", pysamstats["fasta"])
     txt = txt.replace("@@LogPath@@", settings.LOG_FILE())
