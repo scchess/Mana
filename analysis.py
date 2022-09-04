@@ -7,9 +7,10 @@ import settings
 import pysamstats
 
 
-def run(ref, bam, mode, cached=True):
+def run(ref, ecoil, bam, mode, cached=True):
     assert(os.path.exists(ref))
     assert(os.path.exists(bam))
+    assert(os.path.exists(ecoil))
     assert(mode == "mRNA" or mode == "plasmid")
 
     x1 = samtools.run(bam, cached)
