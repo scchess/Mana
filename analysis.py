@@ -8,7 +8,7 @@ import settings
 import pysamstats
 
 
-def run(ref, ecoil, bam, mode, cached=True):
+def run(ref, ecoil, bam, mode, cached=False):
     assert(os.path.exists(ref))
     assert(os.path.exists(bam))
     assert(os.path.exists(ecoil))
