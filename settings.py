@@ -14,7 +14,7 @@ def OUT_PATH():
 
 
 def LOG_FILE():
-    return OUT_PATH() + os.sep + "mrna_log.txt"
+    return OUT_PATH() + os.sep + "log.txt"
 
 
 def REPORT_FILE():

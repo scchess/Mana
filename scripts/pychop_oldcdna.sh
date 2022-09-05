@@ -179,6 +179,8 @@ for i in ${!startbed_arr[@]}; do
     samtools flagstat $outputpath/$samplefile/$samplefile'_passed_pychop_oldcdn_startcoord.bam' > $outputpath/$samplefile/$samplefile'_passed_pychop_oldcdn_startcoord_flagstat.txt'
 done
 
+
+
 ##### Get full length bam --intersect newly made start coord bam with reads ending at last base 3utr coordinate from endutr.bed file ---- index and flagstat
 for i in ${!endbed_arr[@]}; do
     endbedfile=${endbed_arr[i]}

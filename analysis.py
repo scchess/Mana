@@ -25,8 +25,6 @@ def run(ref, ecoil, bam, mode, cached=True):
     pysam_path = x2["pysam_path"]
     coverage_path = x1["coverage_path"]
     flagstat_path = x1["flagstat_path"]
-    flagstat_path = x3["flagstat_path"]
-    intersect_path = x3["intersect_path"]
     consensus_path = x4["consensus_path"]
 
     assert(os.path.exists(bed_path))
@@ -36,7 +34,6 @@ def run(ref, ecoil, bam, mode, cached=True):
     assert(os.path.exists(flagstat_path))
     assert(os.path.exists(coverage_path))
     assert(os.path.exists(flagstat_path))
-    assert(os.path.exists(intersect_path))
     assert(os.path.exists(consensus_path))
 
     with open(settings.REPORT_FILE(), "w") as w:
@@ -51,5 +48,4 @@ def run(ref, ecoil, bam, mode, cached=True):
             "flagstat_path": flagstat_path,
             "coverage_path": coverage_path,
             "flagstat_path": flagstat_path,
-            "intersect_path": intersect_path,
             "consensus_path": consensus_path}

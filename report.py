@@ -18,6 +18,10 @@ def run(samtools, pysamstats, bedtools, bcftools, mode):
     samtools_stats = samtools["stats"]
     samtools_flag = samtools["flag_stat"]
     realigned_flag_stat = samtools["realigned_flag_stat"]
+    start_end_bam_flagstat = bedtools["start_end_bam_flagstat"]["total"]
+    end_not_start_bam_flagstat = bedtools["end_not_start_bam_flagstat"]["total"]
+    start_not_end_bam_flagstat = bedtools["start_not_end_bam_flagstat"]["total"]
+    no_start_no_end_bam_flagstat = bedtools["no_start_no_end_bam_flagstat"]["total"]
 
     txt = txt.replace("@@Mode@@", mode)
     txt = txt.replace("@@Command@@", " ".join(sys.argv[:]))
@@ -76,27 +80,15 @@ def run(samtools, pysamstats, bedtools, bcftools, mode):
     t1 = t1.replace("Total Error ", "Total Error              ")
     txt = txt.replace("@@Table1@@", t1)
 
-    on_target_c = 1 # flag2["total"]
-    of_target_c = 1 # flag3["total"]
-    on_target_p = formatDP(100 * (on_target_c / (on_target_c + of_target_c)))
-    of_target_p = formatDP(100 * (of_target_c / (on_target_c + of_target_c)))
-    on_target_p = str(on_target_p) + "%"
-    of_target_p = str(of_target_p) + "%"
-    total_reads = on_target_c + of_target_c
-
-    margin = " "
-    x1 = ["Reads", "Total", "On-target", "Off-target"]
-    x2 = [margin, margin, margin, margin, margin, margin]
-    x3 = ["%", "100%", str(on_target_p), str(of_target_p)]
-    x4 = [margin, margin, margin, margin, margin, margin]
-    x5 = ["count", str(total_reads), str(on_target_c), str(of_target_c)]
-    df = pd.DataFrame([x1, x2, x3, x4, x5])
+    x1 = ["Full Length Reads", "Degraded from 5-prime Reads", "Degraded from 3-prime Reads", "Off-target Reads"]
+    x3 = [str(start_end_bam_flagstat), str(end_not_start_bam_flagstat), str(start_not_end_bam_flagstat), str(no_start_no_end_bam_flagstat)]
+    df = pd.DataFrame([x1, x3])
     df = df.transpose()
     t2 = tabulate(df, showindex=False, tablefmt="plain")
-    t2 = t2.replace("Reads ", "Reads               ")
     t2 = t2.replace("Total ", "Total               ")
-    t2 = t2.replace("On-target ", "On-target               ")
-    t2 = t2.replace("Off-target ", "Off-target               ")
+    t2 = t2.replace("Degraded from 5-prime Reads", "Degraded from 5-prime Reads    ")
+    t2 = t2.replace("Degraded from 3-prime Reads", "Degraded from 3-prime Reads  ")
+    t2 = t2.replace("Off-target Reads", "Off-target Reads      ")
 
     if mode == "mRNA":
         txt = txt.replace("@@Table2@@", t2)

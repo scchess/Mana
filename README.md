@@ -31,4 +31,4 @@ Use `docker` to show command-line usage:
 Run an plasmid analysis:
 
     docker run -v ${PWD}:/src -i -t mana python3 mana.py --plasmid -b plasmid.bam
-    cat outputs/mrna_results.txt
+    cat outputs/report.txt

@@ -92,7 +92,7 @@ def run(file, cached=False):
     with open(read_length_R, "w") as w:
         w.write(R)
 
-    if not cached or True:
+    if not cached:
         tools.run("samtools index " + file)
         tools.run("samtools depth " + file + " > " + depth_path)
         tools.run("samtools stats " + file + " > " + stats_path)
