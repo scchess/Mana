@@ -1,17 +1,16 @@
 import os
 import tools
 import samtools
-
-BED_PATH = "data/mrna_target.bed"
+import settings
 
 
 def run(file, bed_path=None, cached=False):
     assert(os.path.exists(file))
-    bed_path = BED_PATH if bed_path is None else bed_path
+    bed_path = settings.BED_PATH()
 
-    with open(BED_PATH) as r:
+    with open(bed_path) as r:
         toks = r.readline().split("\t")
-        assert(len(toks) >= 4)
+        assert(len(toks) >= 3)
         chrom = toks[0]
         start = int(toks[1])
         end = int(toks[2])

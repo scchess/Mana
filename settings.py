@@ -1,6 +1,14 @@
 import os
 
 _OUT_PATH = "."
+_BED_PATH = None
+
+
+def BED_PATH():
+    if _BED_PATH is None:
+        return "data/mrna_target.bed"
+    else:
+        return _BED_PATH
 
 
 def TMP_PATH():

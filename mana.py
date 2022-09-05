@@ -36,6 +36,23 @@ if __name__ == '__main__':
         raise Exception("Options --plasmid and --mrna have both been provided. Only one of those can be provided.")
     elif not os.path.exists(args.b):
         raise Exception("File not existed: " + args.b)
+    elif args.p1 is not None and args.p2 is None:
+        raise Exception("Both -p1 and -p2 options must be provided.")
+    elif args.p2 is not None and args.p1 is None:
+        raise Exception("Both -p1 and -p2 options must be provided.")
+
+    if args.p1 is not None:
+        p1 = args.p1
+        p2 = args.p2
+        if not p1.isdigit():
+            raise Exception(p1 + " is not a number")
+        elif not p2.isdigit():
+            raise Exception(p2 + " is not a number")
+        elif p1 >= p2:
+            raise Exception("p2 must be greater than p1")
+        with open("/tmp/mrna_target.bed", "w") as w:
+            w.write("2021-8\t" + str(p1) + "\t" + str(p2))
+        settings._BED_PATH = "/tmp/mrna_target.bed"
 
     settings._OUT_PATH = args.o
     mode = "plasmid" if args.plasmid else "mRNA"
