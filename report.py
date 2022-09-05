@@ -17,12 +17,14 @@ def run(samtools, pysamstats, bedtools, bcftools, mode):
     pysam_stats = pysamstats["stats"]
     samtools_stats = samtools["stats"]
     samtools_flag = samtools["flag_stat"]
+    realigned_flag_stat = samtools["realigned_flag_stat"]
 
     txt = txt.replace("@@Mode@@", mode)
     txt = txt.replace("@@Command@@", " ".join(sys.argv[:]))
     txt = txt.replace("@@Alignments@@", samtools["file"])
     txt = txt.replace("@@Reference@@", pysamstats["fasta"])
     txt = txt.replace("@@LogPath@@", settings.LOG_FILE())
+    txt = txt.replace("@@ReadLengthHistogram@@", samtools["read_length_svg"])
     txt = txt.replace("@@ReportPath@@", settings.REPORT_FILE())
     txt = txt.replace("@@Consensus@@", settings.OUT_PATH() + os.sep + os.path.basename(bcftools["consensus_path"]))
 
@@ -33,6 +35,10 @@ def run(samtools, pysamstats, bedtools, bcftools, mode):
     txt = txt.replace("@@AverageCoverage@@", str(formatDP(pysam_stats["mean_coverage"])))
     txt = txt.replace("@@MinCoverage@@", str(pysam_stats["min_coverage"]))
     txt = txt.replace("@@MaxCoverage@@", str(pysam_stats["max_coverage"]))
+
+    txt = txt.replace("@@E_TotalReads@@", str(realigned_flag_stat["total"]))
+    txt = txt.replace("@@E_MappedReads@@", str(realigned_flag_stat["mapped"]))
+    txt = txt.replace("@@E_UnmappedReads@@", str(realigned_flag_stat["unmapped"]))
 
     txt = txt.replace("@@MatchA@@", str(formatDP(pysam_stats["match_mean"])))
     txt = txt.replace("@@MatchMin@@", str(pysam_stats["match_min"]))
@@ -91,6 +97,10 @@ def run(samtools, pysamstats, bedtools, bcftools, mode):
     t2 = t2.replace("Total ", "Total               ")
     t2 = t2.replace("On-target ", "On-target               ")
     t2 = t2.replace("Off-target ", "Off-target               ")
-    txt = txt.replace("@@Table2@@", t2)
+
+    if mode == "mRNA":
+        txt = txt.replace("@@Table2@@", t2)
+    else:
+        txt = txt.replace("@@Table2@@", "")
 
     return txt
