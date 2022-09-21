@@ -2,18 +2,19 @@ mana - analysis of mRNA manufacture quality using Oxford Nanopore Sequencing
 
 TOOL OPTIONS:
 	Required:
-	-b                          Input BAM file containing ONT reads aligned to plasmid sequence.
-	-f                          Input FASTA file of plasmid template sequence (used for in vitro transcription reaction).
-	-m1                         Start coordinate of mRNA (ie. first base)
-	-m2                         Last coordinate of mRNA (ie. last base)
+	-b                          Input BAM file containing ONT reads aligned to plasmid sequence used to generate mRNA.
+	-f                          Input reference FASTA file of the plasmid sequence used to generate mRNA.
+	-m1                         Start coordinate of mRNA.
+	-m2                         Last coordinate of mRNA before PolyA tract.
 
 	Optional:
 	-h                          Display this help usage message
 	-p1                         Start coordinate of polyA tract (ie. first base)
 	-p2                         Last coordinate of polyA tract (ie. last base)
 	-o                          Output directory. Default to "outputs".
+	--ecoil                     Input FASTA file of the bacterium used for plasmid propagation. Default will be E.coli K12 ASM584v2.
 	--plasmid                   Plasmid analysis
-	--mrna                      mRNA analsysis
+	--mrna                      mRNA analysis
 
 
 USAGE EXAMPLE:
