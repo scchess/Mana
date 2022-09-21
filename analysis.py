@@ -17,7 +17,7 @@ def run(ref, ecoil, bam, mode, cached=False):
     x1 = samtools.run(bam, cached)
     x2 = pysamstats.run(ref, bam, cached)
     x3 = bedtools.run(bam, None, cached)  # May not needed for plasmid analysis but run it anyway...
-    x4 = bcftools.run(ref, bam, cached)
+    x4 = bcftools.run(mode, ref, bam, cached)
 
     bed_path = x3["bed_path"]
     depth_path = x1["depth_path"]
