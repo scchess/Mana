@@ -19,5 +19,4 @@ USAGE EXAMPLE:
 	$ python3 mana.py -b sample.bam -f plasmid_gfp.fasta -m1 432 -m2 1635
 
 OUTPUTS:
-	mrna_results.txt            Output TEXT file report describing mRNA quality.
-	plasmid_results.txt         Output TEXT file report describing plasmid quality (sequencing etc.).
+	report.txt            Output TEXT file report describing plasmid or mRNA quality.

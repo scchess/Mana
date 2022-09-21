@@ -19,16 +19,11 @@ docker is easy and straightforward. Docker will automatically work out the depen
 
 ## Quick Start
 
-Let's download a sample alignment file for plasmid analysis. This sample file came from a recent experiment from the Mercer lab.
-
-    wget https://www.dropbox.com/s/25bvchax1wgvf5m/cDNA_UnMod_37C_NEBT7_BaseGfpmRNA_1strun_allpassedreads_sorted.bam?dl=1
-    mv cDNA_UnMod_37C_NEBT7_BaseGfpmRNA_1strun_allpassedreads_sorted.bam?dl=1 plasmid.bam
-
 Use `docker` to show command-line usage:
 
     docker run mana python3 mana.py
 
 Run a plasmid analysis:
 
-    docker run -v ${PWD}:/src -i -t mana python3 mana.py --plasmid -b plasmid.bam
+    docker run -v ${PWD}:/src -i -t mana python3 mana.py --plasmid -b plasmid.bam -f plasmid.fasta
     cat outputs/report.txt
