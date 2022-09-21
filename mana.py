@@ -24,7 +24,7 @@ if __name__ == '__main__':
     parser.add_argument("--mrna", help="mRNA analsysis", action="store_true")
     parser.add_argument("-o", default="outputs")
     parser.add_argument("-b", help="Input BAM file containing ONT reads aligned to plasmid sequence.", required=True)
-    parser.add_argument("-ref", help="Input FASTA file of plasmid/mRNA template sequence.", required=False)
+    parser.add_argument("-f", help="Input FASTA file of plasmid/mRNA template sequence.", required=True)
     parser.add_argument("-ecoil", help="Input FASTA file of E.coil reference.", required=False)
     parser.add_argument("-p1", help="Start coordinate of mRNA (ie. first base)", required=False)
     parser.add_argument("-p2", help="Last coordinate of mRNA (ie. last base)", required=False)
@@ -57,15 +57,14 @@ if __name__ == '__main__':
     settings._OUT_PATH = args.o
     mode = "plasmid" if args.plasmid else "mRNA"
 
-    if args.ref is None:
-        if mode == "plasmid":
-            args.ref = "data/plasmid_gfp.fasta"
-        else:
-            args.ref = "data/mrna_gfp_ref.fasta"
-
     if args.ecoil is None:
         args.ecoil = "data/GCF_000005845.2_ASM584v2_genomic.fna"
 
+    if not os.path.exists(args.ecoil):
+        raise Exception(args.ecoil + " not found")
+    if not os.path.exists(args.f):
+        raise Exception(args.f + " not found")
+
     os.system("mkdir -p " + args.o)
     tools.info(mode)
-    analysis.run(args.ref, args.ecoil, args.b, mode)
+    analysis.run(args.f, args.ecoil, args.b, mode)
