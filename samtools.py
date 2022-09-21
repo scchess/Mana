@@ -2,6 +2,7 @@ import os
 import tools
 import settings
 import pandas as pd
+from pandas.errors import EmptyDataError
 
 
 DEPTH_PATH = settings.TMP_PATH() + os.sep + "{}_depth.txt"
@@ -122,11 +123,25 @@ def run(file, cached=False):
     stats = parse_stats(stats_path)
     pd_depth = pd.read_csv(depth_path, sep="\t")
     flag_stat = parse_flagstat(flagstat_path)
-    pd_coverage = pd.read_csv(coverage_path, sep="\t")
+
+    try:
+        pd_coverage = pd.read_csv(coverage_path, sep="\t")
+    except EmptyDataError:
+        pd_coverage = pd.DataFrame()
+
     realigned_stats = parse_stats(realigned_stats_path)
-    realigned_pd_depth = pd.read_csv(realigned_depth_path, sep="\t")
+
+    try:
+        realigned_pd_depth = pd.read_csv(realigned_depth_path, sep="\t")
+    except EmptyDataError:
+        realigned_pd_depth = pd.DataFrame()
+
     realigned_flag_stat = parse_flagstat(realigned_flagstat_path)
-    realigned_pd_coverage = pd.read_csv(realigned_coverage_path, sep="\t")
+
+    try:
+        realigned_pd_coverage = pd.read_csv(realigned_coverage_path, sep="\t")
+    except EmptyDataError:
+        realigned_pd_coverage = pd.DataFrame()
 
     return {"file": file,
             "stats": stats,
