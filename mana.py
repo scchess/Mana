@@ -57,11 +57,11 @@ if __name__ == '__main__':
     settings._OUT_PATH = args.o
     mode = "plasmid" if args.plasmid else "mRNA"
 
-    if args.ecoil is None:
-        args.ecoil = "data/GCF_000005845.2_ASM584v2_genomic.fna"
+    if args.ecoli is None:
+        args.ecoli = "data/GCF_000005845.2_ASM584v2_genomic.fna"
 
     if not os.path.exists(args.ecoli):
-        raise Exception(args.ecoil + " not found")
+        raise Exception(args.ecoli + " not found")
     if not os.path.exists(args.f):
         raise Exception(args.f + " not found")
 
