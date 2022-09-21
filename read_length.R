@@ -8,5 +8,5 @@ library("ggpubr")
 library(svglite)
 res <- 144
 svglite("@@Output@@", width = 1080/res, height = 720/res)
-ggplot(data = df, aes(x = length, y = count)) + geom_point(color = "dark blue") + xlab("length") + ylab("count") + theme_classic()
+ggplot(data = df, aes(x = length, y = count)) + geom_line(color="blue") + xlab("Read Count") + ylab("Sequenced Read Length (nt)") + theme_classic()
 dev.off()
