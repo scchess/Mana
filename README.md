@@ -33,7 +33,10 @@ Let's take an example, assume the following file paths:
 
 To run a plasmid analysis with the file paths, one would do:
 
-    docker run -v /data/my_alignments:/data1 -v /home/my_files/my_references:/data2 -v /my_mana_outputs:/data3 ${PWD}:/src -i -t mana python3 mana.py --plasmid -b /data1/alignnment.bam -f /data2/reference.fasta -f /data3/mana_ouputs
+    docker run -v /data/my_alignments:/data1
+               -v /home/my_files/my_references:/data2
+               -v /my_mana_outputs:/data3 ${PWD}:/src
+               -i -t mana python3 mana.py --plasmid -b /data1/alignnment.bam -f /data2/reference.fasta -f /data3/mana_ouputs
     
 Note how the directories are mounted to docker with the "-v" option. For example, the `/data/my_alignments/alignnment.bam` alignment file is broken into:
 
