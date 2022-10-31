@@ -44,5 +44,5 @@ To run a plasmid analysis with the file paths, one would do:
     
 Note how the directories are mounted to docker with the "-v" option. For example, the `/data/my_alignments/alignnment.bam` alignment file is broken into:
 
-* -v /data/my_alignments:/data1
-* -b /data1/alignnment.bam
+* `-v /data/my_alignments:/data1`
+* `-b /data1/alignnment.bam`
