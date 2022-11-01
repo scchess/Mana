@@ -27,9 +27,9 @@ In order to run the program with your files, it is important to make sure the fi
 
 Let's take an example, assume the following file paths:
 
-* /data/my_alignments/alignnment.bam
-* /home/my_files/my_references/reference.fasta
-* /my_mana
+* `/data/my_alignments/alignnment.bam`
+* `/home/my_files/my_references/reference.fasta`
+* `/my_mana`
 
 To run a plasmid analysis with the file paths, one would do:
 
