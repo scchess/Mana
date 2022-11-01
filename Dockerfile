@@ -21,9 +21,6 @@ RUN git clone https://github.com/lh3/minimap2.git && \
     make && \
     cp minimap2 /usr/local/bin/
 
-RUN R -e "install.packages('svglite',dependencies=TRUE, repos='http://cran.rstudio.com/')"
-RUN R -e "install.packages('ggpubr',dependencies=TRUE, repos='http://cran.rstudio.com/')"
-
 RUN wget https://github.com/samtools/samtools/releases/download/1.15.1/samtools-1.15.1.tar.bz2 && \
     bzip2 -d samtools-1.15.1.tar.bz2 && \
     tar -xf samtools-1.15.1.tar && \
@@ -63,6 +60,9 @@ RUN /root/miniconda3/bin/conda config --add channels defaults && \
     /root/miniconda3/bin/conda install -y pysamstats
 
 ENV PATH "$PATH:/root/miniconda3/bin"
+
+RUN R -e "install.packages('svglite',dependencies=TRUE, repos='http://cran.rstudio.com/')"
+RUN R -e "install.packages('ggpubr',dependencies=TRUE, repos='http://cran.rstudio.com/')"
 
 WORKDIR /src
 COPY . /src
