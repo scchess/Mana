@@ -15,5 +15,5 @@ ggplot(data = df, aes(x=length, y=count)) +
     geom_vline(aes(xintercept=x)) +
     annotate("text", x=x-250, y=y, label=x) +
     scale_x_continuous(limits = c(0, 5000)) +
-    geom_line(color="blue") + xlab("Read Count") + ylab("Sequenced Read Length (nt)") + theme_classic()
+    geom_line(color="blue") + xlab("Sequenced Read Length (nt)") + ylab("Read Count") + theme_classic()
 dev.off()
