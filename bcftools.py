@@ -29,7 +29,7 @@ def run(mode, ref, file, cached=False):
         if mode == "plasmid":
             cmd = "bcftools mpileup -d 300000000 --no-BAQ --min-BQ 0 -Ou -f {} {} | bcftools call -c -M --ploidy 1 -Oz -o {}"
         else:
-            cmd = "bcftools --targets " + targets + " mpileup -d 300000000 --no-BAQ --min-BQ 0 -Ou -f {} {} | bcftools call -c -M --ploidy 1 -Oz -o {}"
+            cmd = "bcftools mpileup --targets " + targets + " -d 300000000 --no-BAQ --min-BQ 0 -Ou -f {} {} | bcftools call -c -M --ploidy 1 -Oz -o {}"
 
         cmd = cmd.format(ref, file, variants_path)
         tools.run(cmd)
