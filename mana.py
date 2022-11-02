@@ -41,6 +41,17 @@ if __name__ == '__main__':
     elif args.p2 is not None and args.p1 is None:
         raise Exception("Both -p1 and -p2 options must be provided.")
 
+    settings._OUT_PATH = args.o
+    mode = "plasmid" if args.plasmid else "mRNA"
+
+    if args.ecoli is None:
+        args.ecoli = "data/GCF_000005845.2_ASM584v2_genomic.fna"
+
+    if not os.path.exists(args.ecoli):
+        raise Exception(args.ecoli + " not found")
+    if not os.path.exists(args.f):
+        raise Exception(args.f + " not found")
+
     if args.p1 is not None:
         p1 = args.p1
         p2 = args.p2
@@ -52,20 +63,13 @@ if __name__ == '__main__':
         p2 = int(p2)
         if p1 >= p2:
             raise Exception("p2 must be greater than p1")
+        with open(args.f) as r:
+            for line in r:
+                chrom = line.strip().split(" ")[0].replace(">", "")
+                break
         with open("/tmp/mrna_target.bed", "w") as w:
-            w.write("2021-8\t" + str(p1) + "\t" + str(p2))
+            w.write(chrom + "\t" + str(p1) + "\t" + str(p2))
         settings._BED_PATH = "/tmp/mrna_target.bed"
-
-    settings._OUT_PATH = args.o
-    mode = "plasmid" if args.plasmid else "mRNA"
-
-    if args.ecoli is None:
-        args.ecoli = "data/GCF_000005845.2_ASM584v2_genomic.fna"
-
-    if not os.path.exists(args.ecoli):
-        raise Exception(args.ecoli + " not found")
-    if not os.path.exists(args.f):
-        raise Exception(args.f + " not found")
 
     os.system("mkdir -p " + args.o)
     tools.info(mode)
