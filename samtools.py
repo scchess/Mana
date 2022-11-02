@@ -66,6 +66,10 @@ def parse_flagstat(file):
 def run(file, cached=False):
     READ_LENGTH_SVG = settings.OUT_PATH() + os.sep + "{}_length.svg"
 
+    tools.run("samtools sort " + file + " > /tmp/alignment.bam")
+    assert(os.path.exists("/tmp/alignment.bam"))
+    file = "/tmp/alignment.bam"
+
     depth_path = DEPTH_PATH.format(os.path.basename(file))
     stats_path = STATS_PATH.format(os.path.basename(file))
     coverage_path = COVERAGE_PATH.format(os.path.basename(file))
