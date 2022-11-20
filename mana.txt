@@ -4,8 +4,6 @@ TOOL OPTIONS:
 	Required:
 	-b                          Input BAM file containing ONT reads aligned to plasmid sequence used to generate mRNA.
 	-f                          Input reference FASTA file of the plasmid sequence used to generate mRNA.
-	-p1                         Start coordinate of mRNA.
-	-p2                         Last coordinate of mRNA before PolyA tract.
 
 	Optional:
 	-h                          Display this help usage message
@@ -13,6 +11,8 @@ TOOL OPTIONS:
 	--ecoli                     Input FASTA file of the bacterium used for plasmid propagation. Default will be E.coli K12 ASM584v2.
 	--plasmid                   Plasmid analysis
 	--mrna                      mRNA analysis
+	-p1                         Start coordinate of mRNA.
+	-p2                         Last coordinate of mRNA before PolyA tract.
 
 
 USAGE EXAMPLE:
