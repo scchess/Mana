@@ -49,7 +49,8 @@ def parse_flagstat(file):
     primary_duplicates = reads[5]
     mapped = reads[6]
     primary_mapped = reads[7]
-    unmapped = total - mapped
+    unmapped = primary - primary_mapped
+    assert(unmapped >= 0)
 
     return {"file": file,
             "total": total,
@@ -64,11 +65,12 @@ def parse_flagstat(file):
 
 
 def run(file, cached=False):
+    assert(os.path.exists(file))
     READ_LENGTH_SVG = settings.OUT_PATH() + os.sep + "{}_length.svg"
 
-    tools.run("samtools sort " + file + " > /tmp/alignment.bam")
-    assert(os.path.exists("/tmp/alignment.bam"))
-    file = "/tmp/alignment.bam"
+    #tools.run("samtools sort " + file + " > /tmp/alignment.bam")
+    #assert(os.path.exists("/tmp/alignment.bam"))
+    #file = "/tmp/alignment.bam"
 
     depth_path = DEPTH_PATH.format(os.path.basename(file))
     stats_path = STATS_PATH.format(os.path.basename(file))

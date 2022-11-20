@@ -32,8 +32,8 @@ def run(samtools, pysamstats, bedtools, bcftools, mode):
     txt = txt.replace("@@ReportPath@@", settings.REPORT_FILE())
     txt = txt.replace("@@Consensus@@", settings.OUT_PATH() + os.sep + os.path.basename(bcftools["consensus_path"]))
 
-    txt = txt.replace("@@TotalReads@@", str(samtools_flag["total"]))
-    txt = txt.replace("@@MappedReads@@", str(samtools_flag["mapped"]))
+    txt = txt.replace("@@TotalReads@@", str(samtools_flag["primary"]))
+    txt = txt.replace("@@MappedReads@@", str(samtools_flag["primary_mapped"]))
     txt = txt.replace("@@UnmappedReads@@", str(samtools_flag["unmapped"]))
     txt = txt.replace("@@ReadLengthAverage@@", str(samtools_stats["read_average"]))
     txt = txt.replace("@@AverageCoverage@@", str(formatDP(pysam_stats["mean_coverage"])))
