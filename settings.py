@@ -11,6 +11,10 @@ def BED_PATH():
         return _BED_PATH
 
 
+def USE_BED_PATH():
+    return _BED_PATH != None
+
+
 def TMP_PATH():
     os.system("mkdir -p .mana")
     return ".mana"
