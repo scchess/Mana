@@ -37,18 +37,30 @@ Let's take an example, assume the following file paths:
 
 To run a plasmid analysis with the file paths, one would do:
 
-    docker run -v /data/my_alignments:/data1
-               -v /home/my_files/my_references:/data2
-               -v /my_mana_outputs:/data3 ${PWD}:/src
-               -i -t mana python3 mana.py
-               --plasmid
-               -b /data1/alignnment.bam
-               -f /data2/reference.fasta
-               -o /data3/mana_ouputs
+    wget https://www.dropbox.com/s/umeo8q5j4epl1ip/2022_17_483289_F8_covid_vac_base_passed_pychop_oldcdn_sorted.bam?dl=1
+    wget https://www.dropbox.com/s/qdvr1zg2t3j4t1p/2022_14_482162_F4_covid_vac_base_passed_pychop_oldcdn_sorted.bam?dl=1
+    wget https://www.dropbox.com/s/2wh2dokdtc6pras/cDNA_Mod_37C_NEBT7_BaseGfpmRNA_1strun_passed_pychop_oldcdn_sorted.bam?dl=1
+    wget https://www.dropbox.com/s/3zb49m7erdng40f/mrna17_plasmid_allpassedreads_sorted.bam?dl=1
 
-Note how the directories are mounted to docker with the "-v" option. For example, the `/data/my_alignments/alignnment.bam` alignment file is broken into:
+    wget https://www.dropbox.com/s/0y7dxqxkn019q5g/plasmid_gfp_ref.fasta?dl=1
+    wget https://www.dropbox.com/s/o23nlmyo57s60lg/2022_14_482162_F4.fasta?dl=1
+    wget https://www.dropbox.com/s/r9fcm76fsn1gi8l/2022_17_483289_F8.fasta?dl=1
 
-* `-v /data/my_alignments:/data1` (specify the directory where the alignment file is to docker, and map it to `/data1`)
-* `-b /data1/alignnment.bam` (indicate the mapped file to Mana)
+    mv 2022_17_483289_F8_covid_vac_base_passed_pychop_oldcdn_sorted.bam?dl=1 2022_17_483289_F8_covid_vac_base_passed_pychop_oldcdn_sorted.bam
+    mv 2022_14_482162_F4_covid_vac_base_passed_pychop_oldcdn_sorted.bam?dl=1 2022_14_482162_F4_covid_vac_base_passed_pychop_oldcdn_sorted.bam
+    mv cDNA_Mod_37C_NEBT7_BaseGfpmRNA_1strun_passed_pychop_oldcdn_sorted.bam?dl=1 cDNA_Mod_37C_NEBT7_BaseGfpmRNA_1strun_passed_pychop_oldcdn_sorted.bam
+    mv mrna17_plasmid_allpassedreads_sorted.bam?dl=1 mrna17_plasmid_allpassedreads_sorted.bam
 
-The execution time will be about 5 minutes.
+    mv plasmid_gfp_ref.fasta?dl=1 plasmid_gfp_ref.fasta
+    mv 2022_14_482162_F4.fasta?dl=1 2022_14_482162_F4.fasta
+    mv 2022_17_483289_F8.fasta?dl=1 2022_17_483289_F8.fasta
+
+    docker run -v ${PWD}:/src -i -t mana \
+               python3 mana.py --mrna \
+               -b /src/mrna17_plasmid_allpassedreads_sorted.bam \
+               -f /src/2022_17_483289_F8.fasta \
+               -o /src/manatestvac17_plasmid
+
+    Note how the directories are mounted to docker with the "-v" option.
+
+The analysis time will be about 10 minutes.
