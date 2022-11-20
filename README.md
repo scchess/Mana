@@ -6,16 +6,20 @@ Command-line tool that analyses ONT alignments (.BAM) to report quality control 
 
 This program requires the following dependencies:
 
-* [SAMTool](https://samtool.org/)
-* [Pysam](https://pysam.readthedocs.io/en/latest/api.html)
-* [bedtools](https://bedtools.readthedocs.io/en/latest/)
+* [SAMTool 1.5.1](http://www.htslib.org)
+* [BCFtools 1.16](http://www.htslib.org)
+* [Pysam 0.20.0](https://pysam.readthedocs.io/en/latest/api.html)
+* [bedtools 2.30.0](https://bedtools.readthedocs.io/en/latest)
 
-The dependencies can be installed manually, however, an alternative is `docker`. Building this program on
-docker is easy and straightforward. Docker will automatically work out the dependencies.
+The dependencies can be installed manually (please check their listed websites), however, an
+alternative is `docker`. Building this program on docker is easy and straightforward. Docker
+will automatically work out the dependencies.
 
     git clone https://github.com/scchess/Mana.git
     cd Mana
     docker build -t mana .
+
+The installation time will take about 30 minutes.
 
 ## Quick Start
 
@@ -41,8 +45,10 @@ To run a plasmid analysis with the file paths, one would do:
                -b /data1/alignnment.bam
                -f /data2/reference.fasta
                -o /data3/mana_ouputs
-    
+
 Note how the directories are mounted to docker with the "-v" option. For example, the `/data/my_alignments/alignnment.bam` alignment file is broken into:
 
 * `-v /data/my_alignments:/data1` (specify the directory where the alignment file is to docker, and map it to `/data1`)
 * `-b /data1/alignnment.bam` (indicate the mapped file to Mana)
+
+The run time will be about 5 minutes.
