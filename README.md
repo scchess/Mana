@@ -51,4 +51,4 @@ Note how the directories are mounted to docker with the "-v" option. For example
 * `-v /data/my_alignments:/data1` (specify the directory where the alignment file is to docker, and map it to `/data1`)
 * `-b /data1/alignnment.bam` (indicate the mapped file to Mana)
 
-The run time will be about 5 minutes.
+The execution time will be about 5 minutes.
