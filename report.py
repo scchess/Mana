@@ -74,9 +74,9 @@ def run(samtools, pysamstats, bedtools, bcftools, mode):
     t1 = tabulate(df, showindex=False, tablefmt="plain")
     t1 = t1.replace("Frequency ", "Frequency              ")
     t1 = t1.replace("Match ", "Match              ")
+    t1 = t1.replace("Insertion ", "Insertion              ")
     t1 = t1.replace("Mismatch ", "Mismatch              ")
     t1 = t1.replace("Deletion ", "Deletion              ")
-    t1 = t1.replace("Insertion ", "Insertion              ")
     t1 = t1.replace("Total Error ", "Total Error              ")
     txt = txt.replace("@@Table1@@", t1)
 

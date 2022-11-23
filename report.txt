@@ -24,7 +24,7 @@ Max Coverage                @@MaxCoverage@@
 Error Performance per Nucleotide
 @@Table1@@
 Notes	 	 	 
-Error = mismatch + insertion + deletion			
+Error = mismatch + insertion
 Mismatch does not include deletion			
 
 Mapping to E.coil
