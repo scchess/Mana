@@ -18,6 +18,22 @@ class MyArgumentParser(argparse.ArgumentParser):
         return usage()
 
 
+def create_bed(fasta, out, p1, p2):
+    assert(os.path.exists(fasta))
+    p1 = int(p1)
+    p2 = int(p2)
+    if p1 >= p2:
+        raise Exception("p2 must be greater than p1")
+    with open(fasta) as r:
+        for line in r:
+            chrom = line.strip().split(" ")[0].replace(">", "")
+            break
+    tmp = out + os.sep + "mrna_target.bed"
+    with open(tmp, "w") as w:
+        w.write(chrom + "\t" + str(p1) + "\t" + str(p2))    
+    return tmp
+
+
 if __name__ == '__main__':
     parser = MyArgumentParser()
     parser.add_argument("--plasmid", help="Plasmid analysis", action="store_true")
@@ -59,17 +75,8 @@ if __name__ == '__main__':
             raise Exception(p1 + " is not a number")
         elif not p2.isdigit():
             raise Exception(p2 + " is not a number")
-        p1 = int(p1)
-        p2 = int(p2)
-        if p1 >= p2:
-            raise Exception("p2 must be greater than p1")
-        with open(args.f) as r:
-            for line in r:
-                chrom = line.strip().split(" ")[0].replace(">", "")
-                break
-        tmp = args.o + os.sep + "mrna_target.bed"
-        with open(tmp, "w") as w:
-            w.write(chrom + "\t" + str(p1) + "\t" + str(p2))
+        tmp = create_bed(args.f, args.o, p1, p2)
+        assert(os.path.exists(tmp))
         settings._BED_PATH = tmp
 
     os.system("mkdir -p " + args.o)
