@@ -67,9 +67,10 @@ if __name__ == '__main__':
             for line in r:
                 chrom = line.strip().split(" ")[0].replace(">", "")
                 break
-        with open("/tmp/mrna_target.bed", "w") as w:
+        tmp = args.o + os.sep + "mrna_target.bed"
+        with open(tmp, "w") as w:
             w.write(chrom + "\t" + str(p1) + "\t" + str(p2))
-        settings._BED_PATH = "/tmp/mrna_target.bed"
+        settings._BED_PATH = tmp
 
     os.system("mkdir -p " + args.o)
     tools.info(mode)
