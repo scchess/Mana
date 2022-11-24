@@ -43,6 +43,7 @@ def run(file, bed_path=None, cached=False):
     not_start_not_end_flagstat = "/tmp/not_start_not_end.bam_flagstat.txt"
 
     if not cached:
+        tools.info("------------------------ BEDTOOLS START ------------------------")
         tools.run("bedtools intersect -a " + file + " -b " + start_bed + " > " + start)
         tools.run("samtools index " + start)
         tools.run("samtools flagstat " + start + " > " + start_flagstat)
@@ -74,6 +75,7 @@ def run(file, bed_path=None, cached=False):
         tools.run("bedtools intersect -a " + not_start + " -b " + end_bed + " -v > " + not_start_not_end)
         tools.run("samtools index " + not_start_not_end)
         tools.run("samtools flagstat " + not_start_not_end + " > " + not_start_not_end_flagstat)
+        tools.info("------------------------ BEDTOOLS END ------------------------")
 
     # full_length_reads
     start_end_bam_flagstat = samtools.parse_flagstat(start_end_flagstat)
@@ -84,7 +86,7 @@ def run(file, bed_path=None, cached=False):
     # degraded_from3prime
     start_not_end_bam_flagstat = samtools.parse_flagstat(start_not_end_flagstat)
 
-    # offtarget
+    # off-target
     no_start_no_end_bam_flagstat = samtools.parse_flagstat(not_start_not_end_flagstat)
 
     assert(os.path.exists(bed_path))
