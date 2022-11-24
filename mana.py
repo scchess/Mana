@@ -75,7 +75,7 @@ if __name__ == '__main__':
             raise Exception(p1 + " is not a number")
         elif not p2.isdigit():
             raise Exception(p2 + " is not a number")
-        tmp = create_bed(args.f, args.o, p1, p2)
+        tmp = create_bed(args.f, settings.TMP_PATH(), p1, p2)
         assert(os.path.exists(tmp))
         settings._BED_PATH = tmp
 
