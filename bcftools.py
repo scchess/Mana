@@ -51,7 +51,3 @@ def run(mode, ref, file, cached=False, targets=None):
 
     assert(os.path.exists(consensus_path))
     return {"consensus_path": consensus_path, "variants_path": variants_path}
-
-
-
-
