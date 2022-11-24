@@ -61,13 +61,13 @@ def run(samtools, pysamstats, bedtools, bcftools, mode):
     txt = txt.replace("@@TotalMax@@", str(pysam_stats["total_max"]))
 
     margin = ""
-    x1 = ["Frequency %", "Match", "Mismatch", "Deletion", "Insertion", "Total Error"]
+    x1 = ["Frequency %", "Match", "Insertion", "Mismatch", "Deletion", "Total Error"]
     x2 = [margin, margin, margin, margin, margin, margin]
-    x3 = ["avg", str(formatDP(pysam_stats["match_mean"])), str(formatDP(pysam_stats["mismatches_mean"])), str(formatDP(pysam_stats["deletions_mean"])), str(formatDP(pysam_stats["insertions_mean"])), str(formatDP(pysam_stats["total_mean"]))]
+    x3 = ["avg", str(formatDP(pysam_stats["match_mean"])), str(formatDP(pysam_stats["insertions_mean"])), str(formatDP(pysam_stats["mismatches_mean"])), str(formatDP(pysam_stats["deletions_mean"])), str(formatDP(pysam_stats["total_mean"]))]
     x4 = [margin, margin, margin, margin, margin, margin]
-    x5 = ["max", str(formatDP(pysam_stats["match_max"])), str(formatDP(pysam_stats["mismatches_max"])), str(formatDP(pysam_stats["deletions_max"])), str(formatDP(pysam_stats["insertions_max"])), str(formatDP(pysam_stats["total_max"]))]
+    x5 = ["max", str(formatDP(pysam_stats["match_max"])), str(formatDP(pysam_stats["insertions_max"])), str(formatDP(pysam_stats["mismatches_max"])), str(formatDP(pysam_stats["deletions_max"])), str(formatDP(pysam_stats["total_max"]))]
     x6 = [margin, margin, margin, margin, margin, margin]
-    x7 = ["min", str(formatDP(pysam_stats["match_min"])), str(formatDP(pysam_stats["mismatches_min"])), str(formatDP(pysam_stats["deletions_min"])), str(formatDP(pysam_stats["insertions_min"])), str(formatDP(pysam_stats["total_min"]))]
+    x7 = ["min", str(formatDP(pysam_stats["match_min"])), str(formatDP(pysam_stats["insertions_min"])), str(formatDP(pysam_stats["mismatches_min"])), str(formatDP(pysam_stats["deletions_min"])), str(formatDP(pysam_stats["total_min"]))]
 
     df = pd.DataFrame([x1, x2, x3, x4, x5, x6, x7])
     df = df.transpose()
