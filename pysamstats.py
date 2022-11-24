@@ -51,9 +51,9 @@ def parse(file):
     insertions_min = np.min(df["Insertion per base"])
     insertions_max = np.max(df["Insertion per base"])
 
-    total_mean = np.mean([mismatches_mean, deletions_mean, insertions_mean])
-    total_min = np.min([mismatches_min, deletions_min, insertions_min])
-    total_max = np.max([mismatches_max, deletions_max, insertions_max])
+    total_min = np.min([mismatches_min, deletions_min])
+    total_max = np.max([mismatches_max, deletions_max])
+    total_mean = np.mean([mismatches_mean, deletions_mean])
 
     mean_coverage = np.mean(df["reads_all"])
     min_coverage = np.min(df["reads_all"])

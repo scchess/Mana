@@ -44,11 +44,11 @@ To run a plasmid analysis with the file paths, one would do:
     wget https://www.dropbox.com/s/qdvr1zg2t3j4t1p/2022_14_482162_F4_covid_vac_base_passed_pychop_oldcdn_sorted.bam?dl=1
     wget https://www.dropbox.com/s/umeo8q5j4epl1ip/2022_17_483289_F8_covid_vac_base_passed_pychop_oldcdn_sorted.bam?dl=1
     wget https://www.dropbox.com/s/o23nlmyo57s60lg/2022_14_482162_F4.fasta?dl=1
+    wget https://www.dropbox.com/s/91n9xj9wg6rdk66/mrna14_plasmid_allpassedreads_sorted.bam?dl=1
 
     wget https://www.dropbox.com/s/0y7dxqxkn019q5g/plasmid_gfp_ref.fasta?dl=1
     wget https://www.dropbox.com/s/o23nlmyo57s60lg/2022_14_482162_F4.fasta?dl=1
     wget https://www.dropbox.com/s/r9fcm76fsn1gi8l/2022_17_483289_F8.fasta?dl=1
-    mv 2022_14_482162_F4.fasta?dl=1 2022_14_482162_F4.fasta
 
     mv 2022_17_483289_F8_covid_vac_base_passed_pychop_oldcdn_sorted.bam?dl=1 2022_17_483289_F8_covid_vac_base_passed_pychop_oldcdn_sorted.bam
     mv 2022_14_482162_F4_covid_vac_base_passed_pychop_oldcdn_sorted.bam?dl=1 2022_14_482162_F4_covid_vac_base_passed_pychop_oldcdn_sorted.bam
@@ -56,7 +56,8 @@ To run a plasmid analysis with the file paths, one would do:
     mv mrna17_plasmid_allpassedreads_sorted.bam?dl=1 mrna17_plasmid_allpassedreads_sorted.bam
     mv 2022_17_483289_F8_covid_vac_base_passed_pychop_oldcdn_sorted.bam?dl=1 2022_17_483289_F8_covid_vac_base_passed_pychop_oldcdn_sorted.bam
     mv 2022_14_482162_F4_covid_vac_base_passed_pychop_oldcdn_sorted.bam?dl=1 2022_14_482162_F4_covid_vac_base_passed_pychop_oldcdn_sorted.bam
-
+    mv 2022_14_482162_F4.fasta?dl=1 2022_14_482162_F4.fasta
+    mv 91n9xj9wg6rdk66/mrna14_plasmid_allpassedreads_sorted.bam?dl=1 91n9xj9wg6rdk66/mrna14_plasmid_allpassedreads_sorted.bam
     mv plasmid_gfp_ref.fasta?dl=1 plasmid_gfp_ref.fasta
     mv 2022_14_482162_F4.fasta?dl=1 2022_14_482162_F4.fasta
     mv 2022_17_483289_F8.fasta?dl=1 2022_17_483289_F8.fasta

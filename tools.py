@@ -1,5 +1,16 @@
 import os
+import pickle
 import settings
+
+
+def save(x, file):
+    with open(file, "wb") as w:
+        pickle.dump(x, w)
+
+
+def load(file):
+    with open(file, "rb") as r:
+        return pickle.load(r)
 
 
 def formatDP(x):
