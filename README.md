@@ -37,6 +37,6 @@ To run an analysis with the file paths, one would do:
                -f /src/2022_17_483289_F8.fasta \
                -o /src/manatestvac17_plasmid
 
-    Note how the directories are mounted to docker with the "-v" option.
+Note how the directories are mounted to docker with the "-v" option.
 
 The analysis time will be about 10 minutes.
