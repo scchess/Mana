@@ -33,9 +33,9 @@ To run an analysis with the file paths, one would do:
 
     docker run -v ${PWD}:/src -i -t mana \
                python3 mana.py --mrna \
-               -b /src/mrna17_plasmid_allpassedreads_sorted.bam \
-               -f /src/2022_17_483289_F8.fasta \
-               -o /src/manatestvac17_plasmid
+               -b /src/alignment.bam \
+               -f /src/file.fasta \
+               -o /src/out
 
 Note how the directories are mounted to docker with the "-v" option.
 
