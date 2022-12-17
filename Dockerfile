@@ -66,3 +66,4 @@ RUN R -e "install.packages('ggpubr',dependencies=TRUE, repos='http://cran.rstudi
 
 WORKDIR /src
 COPY . /src
+COPY data /src/
