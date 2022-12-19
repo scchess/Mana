@@ -18,10 +18,10 @@ def run(samtools, pysamstats, bedtools, bcftools, mode):
     samtools_stats = samtools["stats"]
     samtools_flag = samtools["flag_stat"]
     realigned_flag_stat = samtools["realigned_flag_stat"]
-    start_end_bam_flagstat = bedtools["start_end_bam_flagstat"]["total"]
-    end_not_start_bam_flagstat = bedtools["end_not_start_bam_flagstat"]["total"]
-    start_not_end_bam_flagstat = bedtools["start_not_end_bam_flagstat"]["total"]
-    no_start_no_end_bam_flagstat = bedtools["no_start_no_end_bam_flagstat"]["total"]
+    start_end_bam_flagstat = bedtools["start_end_bam_flagstat"]["primary_mapped"]
+    end_not_start_bam_flagstat = bedtools["end_not_start_bam_flagstat"]["primary_mapped"]
+    start_not_end_bam_flagstat = bedtools["start_not_end_bam_flagstat"]["primary_mapped"]
+    no_start_no_end_bam_flagstat = bedtools["no_start_no_end_bam_flagstat"]["primary_mapped"]
 
     txt = txt.replace("@@Mode@@", mode)
     txt = txt.replace("@@Command@@", " ".join(sys.argv[:]))
@@ -86,9 +86,9 @@ def run(samtools, pysamstats, bedtools, bcftools, mode):
     df = df.transpose()
     t2 = tabulate(df, showindex=False, tablefmt="plain")
     t2 = t2.replace("Total ", "Total               ")
-    t2 = t2.replace("Degraded from 5-prime Reads", "Degraded from 5-prime Reads    ")
-    t2 = t2.replace("Degraded from 3-prime Reads", "Degraded from 3-prime Reads  ")
-    t2 = t2.replace("Off-target Reads", "Off-target Reads      ")
+  # t2 = t2.replace("Degraded from 5-prime Reads", "Degraded from 5-prime Reads    ")
+  # t2 = t2.replace("Degraded from 3-prime Reads", "Degraded from 3-prime Reads  ")
+  # t2 = t2.replace("Off-target Reads", "Off-target Reads      ")
 
     if mode == "mRNA":
         txt = txt.replace("@@Table2@@", t2)
