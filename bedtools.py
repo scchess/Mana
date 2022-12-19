@@ -19,10 +19,10 @@ def run(file, bed_path=None, cached=False):
     end_bed = "/tmp/end.bed"
 
     with open(start_bed, "w") as w:
-        w.write(chrom + "\t" + str(start) + "\t" + str(start + 1))
+        w.write(chrom + "\t" + str(start - 1) + "\t" + str(start))
 
     with open(end_bed, "w") as w:
-        w.write(chrom + "\t" + str(end) + "\t" + str(end + 1))
+        w.write(chrom + "\t" + str(end - 1) + "\t" + str(end))
 
     end = "/tmp/end.bam"
     start = "/tmp/start.bam"
@@ -30,7 +30,7 @@ def run(file, bed_path=None, cached=False):
     start_end = "/tmp/start_end.bam"
     start_not_end = "/tmp/start_not_end.bam"
     end_not_start = "/tmp/end_not_start.bam"
-    not_start_end = "/tmp/not_start_end.bam"
+    #not_start_end = "/tmp/not_start_end.bam"
     not_start_not_end = "/tmp/not_start_not_end.bam"
 
     end_flagstat = "/tmp/end.bam_flagstat.txt"
@@ -39,11 +39,10 @@ def run(file, bed_path=None, cached=False):
     start_end_flagstat = "/tmp/start_end.bam_flagstat.txt"
     start_not_end_flagstat = "/tmp/start_not_end.bam_flagstat.txt"
     end_not_start_flagstat = "/tmp/end_not_start.bam_flagstat.txt"
-    not_start_end_flagstat = "/tmp/not_start_end.bam_flagstat.txt"
+    #not_start_end_flagstat = "/tmp/not_start_end.bam_flagstat.txt"
     not_start_not_end_flagstat = "/tmp/not_start_not_end.bam_flagstat.txt"
 
     if not cached:
-        tools.info("------------------------ BEDTOOLS START ------------------------")
         tools.run("bedtools intersect -a " + file + " -b " + start_bed + " > " + start)
         tools.run("samtools index " + start)
         tools.run("samtools flagstat " + start + " > " + start_flagstat)
@@ -68,9 +67,9 @@ def run(file, bed_path=None, cached=False):
         tools.run("samtools index " + not_start)
         tools.run("samtools flagstat " + not_start + " > " + not_start_flagstat)
 
-        tools.run("bedtools intersect -a " + not_start + " -b " + end_bed + " > " + not_start_end)
-        tools.run("samtools index " + not_start_end)
-        tools.run("samtools flagstat " + not_start_end + " > " + not_start_end_flagstat)
+        #tools.run("bedtools intersect -a " + not_start + " -b " + end_bed + " > " + not_start_end)
+        #tools.run("samtools index " + not_start_end)
+        #tools.run("samtools flagstat " + not_start_end + " > " + not_start_end_flagstat)
 
         tools.run("bedtools intersect -a " + not_start + " -b " + end_bed + " -v > " + not_start_not_end)
         tools.run("samtools index " + not_start_not_end)
