@@ -2,6 +2,10 @@
 
 Command-line tool that analyses ONT alignments (.BAM) to report quality control statistics.
 
+## License
+
+Academic Free License v3.0
+
 ## Installation
 
 This program requires the following dependencies:
