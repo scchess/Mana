@@ -1,4 +1,5 @@
-import report
+#!/usr/bin/env python
+import mana.report as report
 
 
 def test_1():

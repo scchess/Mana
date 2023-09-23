@@ -1,11 +1,12 @@
+#!/usr/bin/env python
 import os
-import tools
-import report
-import samtools
-import bcftools
-import bedtools
-import settings
-import pysamstats
+import mana.tools as tools
+import mana.report as report
+import mana.samtools as samtools
+import mana.bcftools as bcftools
+import mana.bedtools as bedtools
+import mana.settings as settings
+import mana.pysamstats as pysamstats
 
 
 def run(ref, ecoil, bam, mode, cached=False):

@@ -1,4 +1,5 @@
-import bcftools
+#!/usr/bin/env python
+import mana.bcftools as bcftools
 import subprocess
 
 

@@ -1,5 +1,6 @@
+#!/usr/bin/env python
 import math
-import pysamstats
+import mana.pysamstats as pysamstats
 
 
 #

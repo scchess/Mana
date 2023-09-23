@@ -1,21 +1,9 @@
+#!/usr/bin/env python
 import os
-import tools
-import settings
-import analysis
+import mana.tools as tools
+import mana.settings as settings
+import mana.analysis as analysis
 import argparse
-
-
-def usage():
-    with open("mana.txt") as r:
-        return r.read() + "\n\n"
-
-
-class MyArgumentParser(argparse.ArgumentParser):
-    def format_usage(self):
-        return usage()
-
-    def format_help(self):
-        return usage()
 
 
 def create_bed(fasta, out, p1, p2):
@@ -35,7 +23,7 @@ def create_bed(fasta, out, p1, p2):
 
 
 if __name__ == '__main__':
-    parser = MyArgumentParser()
+    parser = argparse.ArgumentParser(description="mana - analysis of mRNA manufacture quality using Oxford Nanopore Sequencing")
     parser.add_argument("--plasmid", help="Plasmid analysis", action="store_true")
     parser.add_argument("--mrna", help="mRNA analsysis", action="store_true")
     parser.add_argument("-o", default="outputs")

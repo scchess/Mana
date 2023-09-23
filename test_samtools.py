@@ -1,5 +1,6 @@
+#!/usr/bin/env python
 import os
-import samtools
+import mana.samtools as samtools
 
 
 def test_1():
