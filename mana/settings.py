@@ -6,7 +6,8 @@ _BED_PATH = None
 
 def BED_PATH():
     if _BED_PATH is None:
-        return "data/mrna_target.bed"
+        dataDir = os.path.join(os.path.abspath(os.path.dirname(__file__)), "data")
+        return os.path.join(dataDir, "mrna_target.bed")
     else:
         return _BED_PATH
 

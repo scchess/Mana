@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import mana.bcftools as bcftools
+import os
 import subprocess
 
 
@@ -39,8 +40,10 @@ python3 mana.py --plasmid -b data/mrna17_plasmid_allpassedreads_sorted.bam -f da
 '''
 
 
+dataDir = os.path.join(os.path.abspath(os.path.dirname(__file__)), "..", "data")
+
 def test_1():
-    x = bcftools.run("plasmid", "data/2022_17_483289_F8.fasta", "data/mrna17_plasmid_allpassedreads_sorted.bam")
+    x = bcftools.run("plasmid", os.path.join(dataDir, "2022_17_483289_F8.fasta"), os.path.join(dataDir, "mrna17_plasmid_allpassedreads_sorted.bam"))
     assert(x["consensus_path"] == ".mana/mrna17_plasmid_allpassedreads_sorted.bam_consensus.fa")
     assert(x["variants_path"] == ".mana/mrna17_plasmid_allpassedreads_sorted.bam_variants.vcf.gz")
     x = subprocess.run(["md5sum", ".mana/mrna17_plasmid_allpassedreads_sorted.bam_consensus.fa"], capture_output=True, text=True).stdout
@@ -48,8 +51,11 @@ def test_1():
 
 
 def test_2():
-    x = bcftools.run("mRNA", "data/2022_17_483289_F8.fasta", "2022_17_483289_F8_covid_vac_base_passed_pychop_oldcdn_sorted.bam", cached=False, targets="2022-14:1290-1908")
+    x = bcftools.run("mRNA", os.path.join(dataDir, "2022_17_483289_F8.fasta"), os.path.join(dataDir, "2022_17_483289_F8_covid_vac_base_passed_pychop_oldcdn_sorted.bam"), cached=False, targets="2022-14:1290-1908")
     assert(x["consensus_path"] == ".mana/2022_17_483289_F8_covid_vac_base_passed_pychop_oldcdn_sorted.bam_consensus.fa")
     assert(x["variants_path"] == ".mana/2022_17_483289_F8_covid_vac_base_passed_pychop_oldcdn_sorted.bam_variants.vcf.gz")
     x = subprocess.run(["md5sum", ".mana/2022_14_482162_F4_covid_vac_base_passed_pychop_oldcdn_sorted.bam_consensus.fa"], capture_output=True, text=True).stdout
     assert "dddfe987e9f91cbbda458e8e40fc4ff4" in x
+
+test_1()
+test_2()
