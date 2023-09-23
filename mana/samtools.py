@@ -1,6 +1,7 @@
+#!/usr/bin/env python
 import os
-import tools
-import settings
+import mana.tools as tools
+import mana.settings as settings
 import pandas as pd
 from pandas.errors import EmptyDataError
 
@@ -87,10 +88,11 @@ def run(file, cached=False):
     realigned_coverage_path = REALIGNED_COVERAGE_PATH.format(os.path.basename(file))
     realigned_flagstat_path = REALIGNED_FLAGSTAT_PATH.format(os.path.basename(file))
 
-    ecoil = "data/GCF_000005845.2_ASM584v2_genomic.fna"
-    assert(os.path.exists(ecoil))
+    dataDir = os.path.join(os.path.abspath(os.path.dirname(__file__)), "data")
+    ecoli = os.path.join(dataDir, "GCF_000005845.2_ASM584v2_genomic.fna")
+    assert(os.path.exists(ecoli))
 
-    read_count = "read_length.R"
+    read_count = os.path.join(os.path.abspath(__file__), "read_length.R")
     assert(os.path.exists(read_count))
 
     with open(read_count) as r:
@@ -108,7 +110,7 @@ def run(file, cached=False):
         tools.run("samtools view -F 2048 " + file + " | awk '{print length($10)}'| sort -n | uniq -c |awk ' { t = $1; $1 = $2; $2 = t; print; } '|tr ' ' '\t'|sed '1d' > " + read_length_path)
         tools.run("Rscript " + read_length_R)
         tools.run("samtools view -b -f 4 " + file + " | samtools fastq > " + unmapped_path)
-        tools.run("minimap2 -ax map-ont " + ecoil + " " + unmapped_path + " | samtools sort > " + realigned_path)
+        tools.run("minimap2 -ax map-ont " + ecoli + " " + unmapped_path + " | samtools sort > " + realigned_path)
         tools.run("samtools index " + realigned_path)
         tools.run("samtools depth " + realigned_path + " > " + realigned_depth_path)
         tools.run("samtools stats " + realigned_path + " > " + realigned_stats_path)

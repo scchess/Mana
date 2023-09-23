@@ -1,6 +1,7 @@
+#!/usr/bin/env python
 import os
-import tools
-import settings
+import mana.tools as tools
+import mana.settings as settings
 
 
 BCFTOOLS_VARIANT = settings.TMP_PATH() + os.sep + "{}_variants.vcf.gz"

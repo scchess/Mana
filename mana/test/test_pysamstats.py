@@ -1,13 +1,17 @@
+#!/usr/bin/env python
 import math
-import pysamstats
+import mana.pysamstats as pysamstats
+import os
 
 
 #
 # https://www.dropbox.com/personal/files%20for%20ted%20and%20mana/files%20and%20results%20plasmid%20testing%20mana%20vs%20manual/manual%20script%20files%20and%20results%20plasmid/vac%2014%20plasmid%20manual%20results%20and%20files?preview=mrna14_plasmid_passed_pysamreporttable.txt
 #
 
+dataDir = os.path.join(os.path.abspath(os.path.dirname(__file__)), "..", "data")
+
 def test_1():
-    x = pysamstats.parse("data/mrna14_plasmid_allpassedreads_sorted.bam_pysam.txt")
+    x = pysamstats.parse(os.path.join(dataDir, "mrna14_plasmid_allpassedreads_sorted.bam_pysam.txt"))
     print(x)
 
     assert x["total_min"] == 0
@@ -37,3 +41,5 @@ def test_1():
     assert math.isclose(x["mean_coverage"], 119458.85762711865)
     assert math.isclose(x["min_coverage"], 40873)
     assert math.isclose(x["max_coverage"], 126687)
+
+test_1()
