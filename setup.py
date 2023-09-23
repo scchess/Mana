@@ -6,6 +6,7 @@ setup(
     version='1.0',
     author='Ted Wong',
     author_email='t.wong@garvan.org.au',
+    scripts=['bin/mana'],
     packages=find_packages(),
     include_package_data=True,
     url='https://github.com/scchess/Mana',
