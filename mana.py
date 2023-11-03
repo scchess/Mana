@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import os
+import sys
 import mana.tools as tools
 import mana.settings as settings
 import mana.analysis as analysis
@@ -32,7 +33,7 @@ if __name__ == '__main__':
     parser.add_argument("-ecoli", help="Input FASTA file of the bacterium used for plasmid propagation. Default will be E.coli K12 ASM584v2.")
     parser.add_argument("-p1", help="Start coordinate of mRNA")
     parser.add_argument("-p2", help="Last coordinate of mRNA before PolyA tract")
-    args = parser.parse_args(args)
+    args = parser.parse_args(sys.argv)
 
     if not args.mrna and not args.plasmid:
         raise Exception("Either --plasmid and --mrna must be provided.")
