@@ -1,9 +1,8 @@
-#!/usr/bin/env python
 import os
 import sys
-import mana.settings as settings
+import settings
 import pandas as pd
-from mana.tools import formatDP
+from tools import formatDP
 from tabulate import tabulate
 tabulate.PRESERVE_WHITESPACE = True
 

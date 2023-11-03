@@ -1,8 +1,7 @@
-#!/usr/bin/env python
 import os
-import mana.tools as tools
-import mana.samtools as samtools
-import mana.settings as settings
+import tools
+import samtools
+import settings
 
 
 def run(file, bed_path=None, cached=False):
