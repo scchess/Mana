@@ -17,13 +17,15 @@ This program requires the following dependencies:
 
 The dependencies can be installed manually (please check their listed websites), however, an
 alternative is `docker`. Building this program on docker is easy and straightforward. Docker
-will automatically work out the dependencies.
+will automatically work out the dependencies. A pre-built docker image is available:
+
+    docker pull scchess/mana && docker tag scchess/mana mana
+
+If you would like to build it yourself (>= 20 minutes and not recommended, a pre-built docker image is available), please run the following:  
 
     git clone https://github.com/scchess/Mana.git
     cd Mana
     docker build -t mana .
-
-The installation time will take about 30 minutes.
 
 ## Quick Start
 
