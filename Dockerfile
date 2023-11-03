@@ -1,4 +1,4 @@
-FROM r-base
+FROM r-base:4.3.1
 RUN apt-get update && \
     apt-get install -y git && \
     apt-get install -y wget && \
@@ -9,7 +9,7 @@ RUN apt-get update && \
     apt-get install -y libxml2-dev && \
     apt-get install -y libncurses5-dev && \
     apt-get install -y build-essential && \
-    apt-get install -y python3.9 && \
+    apt-get install -y python3.11 && \
     apt-get install -y python3-pip && \
     apt-get install python-is-python3 && \
     apt-get install -y libcurl4-openssl-dev && \
@@ -36,12 +36,12 @@ RUN wget https://github.com/samtools/bcftools/releases/download/1.16/bcftools-1.
     make && \
     cp bcftools /usr/local/bin/
 
-RUN pip3 install nanosim-h && \
-    pip3 install cython && \
-    pip3 install "setuptools<58.0.0" && \
-    pip3 install pytest && \
-    pip3 install pandas && \
-    pip3 install tabulate
+RUN pip3 install --break-system-packages nanosim-h && \
+    pip3 install --break-system-packages cython && \
+    pip3 install --break-system-packages "setuptools<58.0.0" && \
+    pip3 install --break-system-packages pytest && \
+    pip3 install --break-system-packages pandas && \
+    pip3 install --break-system-packages tabulate
 
 RUN wget https://github.com/arq5x/bedtools2/releases/download/v2.30.0/bedtools-2.30.0.tar.gz && \
     tar -xzf bedtools-2.30.0.tar.gz && \
