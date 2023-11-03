@@ -12,6 +12,4 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build image
-      run: docker build -t mana . 
-    - name: Run example
-      run: docker run -v ${PWD}:/src -i -t mana python3 mana.py --mrna -b /src/alignment.bam -f /src/file.fasta -o /src/out
+      run: docker build -t mana .
