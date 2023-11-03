@@ -60,4 +60,3 @@ RUN /root/miniconda3/bin/conda install -y bedtools
 
 WORKDIR /src
 COPY . /src
-COPY mana/data /src/

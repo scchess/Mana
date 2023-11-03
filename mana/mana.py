@@ -22,7 +22,7 @@ def create_bed(fasta, out, p1, p2):
     return tmp
 
 
-def main(args=None):
+if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="mana - analysis of mRNA manufacture quality using Oxford Nanopore Sequencing")
     parser.add_argument("--plasmid", help="Plasmid analysis", action="store_true")
     parser.add_argument("--mrna", help="mRNA analsysis", action="store_true")
