@@ -55,8 +55,8 @@ RUN /root/miniconda3/bin/conda config --add channels defaults && \
     /root/miniconda3/bin/conda config --add channels conda-forge && \
     /root/miniconda3/bin/conda config --add channels bioconda && \
     /root/miniconda3/bin/conda install -y pysam && \
-    /root/miniconda3/bin/conda install -y pysamstats
-RUN /root/miniconda3/bin/conda install -y bedtools
+    /root/miniconda3/bin/conda install -y pysamstats && \
+    /root/miniconda3/bin/conda install -y bedtools
 
 WORKDIR /src
 COPY . /src
