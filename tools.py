@@ -1,7 +1,6 @@
-#!/usr/bin/env python
 import os
 import pickle
-import mana.settings as settings
+import settings
 
 
 def save(x, file):

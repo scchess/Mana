@@ -1,7 +1,6 @@
-#!/usr/bin/env python
 import os
-import mana.tools as tools
-import mana.settings as settings
+import tools
+import settings
 import numpy as np
 import pandas as pd
 
