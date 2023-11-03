@@ -9,7 +9,6 @@ RUN apt-get update && \
     apt-get install -y libxml2-dev && \
     apt-get install -y libncurses5-dev && \
     apt-get install -y build-essential && \
-    apt-get install -y python2 && \
     apt-get install -y python3.9 && \
     apt-get install -y python3-pip && \
     apt-get install python-is-python3 && \
@@ -66,4 +65,4 @@ RUN R -e "install.packages('ggpubr',dependencies=TRUE, repos='http://cran.rstudi
 
 WORKDIR /src
 COPY . /src
-COPY data /src/
+COPY mana/data /src/
