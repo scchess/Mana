@@ -46,16 +46,17 @@ RUN pip3 install --break-system-packages nanosim-h && \
 RUN wget https://repo.anaconda.com/miniconda/Miniconda3-py39_4.12.0-Linux-x86_64.sh && \
     bash Miniconda3-py39_4.12.0-Linux-x86_64.sh -b
 
-ENV PATH "$PATH:/root/miniconda3/bin"
 RUN /root/miniconda3/bin/conda config --add channels defaults && \
     /root/miniconda3/bin/conda config --add channels conda-forge && \
     /root/miniconda3/bin/conda config --add channels bioconda && \
     /root/miniconda3/bin/conda install -y pysam && \
     /root/miniconda3/bin/conda install -y pysamstats && \
     /root/miniconda3/bin/conda install -y bedtools
+ENV PATH "$PATH:/root/miniconda3/bin"
+
+COPY . /src
+WORKDIR /src
 
 RUN R -e "install.packages('svglite',dependencies=TRUE, repos='http://cran.rstudio.com/')"
 RUN R -e "install.packages('ggpubr',dependencies=TRUE, repos='http://cran.rstudio.com/')"
 
-WORKDIR /src
-COPY . /src
